@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class SelectModelListWidget extends StatelessWidget {
@@ -72,11 +73,14 @@ class ModelTile extends StatelessWidget {
           border: Border.all(color: Colors.grey, style: BorderStyle.solid),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Text(
+        child: AutoSizeText(
           title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          minFontSize: 5,
+          maxFontSize: 12,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(
                 fontWeight: FontWeight.w500,
-                fontSize: 12,
               ),
         ));
   }

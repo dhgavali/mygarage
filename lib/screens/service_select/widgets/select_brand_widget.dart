@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class SelectBrandListWidget extends StatelessWidget {
@@ -84,18 +85,23 @@ class BrandTile extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
             height: height * 0.07,
             width: height * 0.07,
             child: Image.asset("assets/images/$img.png"),
           ),
-          Text(
+          AutoSizeText(
             title,
+            maxLines: 1,
+            maxFontSize: 10,
+            minFontSize: 5,
+            overflow: TextOverflow.clip,
             style: Theme.of(context)
                 .textTheme
                 .bodyText1!
-                .copyWith(fontSize: 10, fontWeight: FontWeight.w600),
+                .copyWith(fontWeight: FontWeight.w600),
           ),
         ],
       ),

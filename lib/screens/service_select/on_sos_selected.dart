@@ -30,7 +30,7 @@ class SelectSOSScreen extends StatelessWidget {
             Positioned(
               top: _height * 0.015,
               child: Text(
-                "BEE",
+                "My Garage",
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2!

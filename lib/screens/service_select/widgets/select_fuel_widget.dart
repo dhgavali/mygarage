@@ -1,4 +1,4 @@
-import 'package:bee/utils/colours.dart';
+import 'package:bee/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class SelectFuelWidget extends StatefulWidget {
@@ -23,6 +23,7 @@ class _SelectFuelWidgetState extends State<SelectFuelWidget> {
             setState(() {
               selectedIndex = 0;
             });
+            Navigator.of(context).pushNamed(RouteName.PersistentNavBar);
           },
           child: Container(
             height: widget.height * 0.5,
@@ -30,7 +31,9 @@ class _SelectFuelWidgetState extends State<SelectFuelWidget> {
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10),
-              color: selectedIndex == 0 ? Colours().accentColor : Colors.white,
+              color: selectedIndex == 0
+                  ? Theme.of(context).primaryColor
+                  : Colors.white,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -46,7 +49,7 @@ class _SelectFuelWidgetState extends State<SelectFuelWidget> {
                         fontWeight: FontWeight.w700,
                         color: selectedIndex == 0
                             ? Colors.white
-                            : Colours().kTextColor,
+                            : Theme.of(context).textTheme.bodyText1!.color,
                       ),
                 ),
               ],
@@ -56,12 +59,15 @@ class _SelectFuelWidgetState extends State<SelectFuelWidget> {
         GestureDetector(
           onTap: () => setState(() {
             selectedIndex = 1;
+            Navigator.of(context).pushNamed(RouteName.PersistentNavBar);
           }),
           child: Container(
             height: widget.height * 0.5,
             width: widget.width * 0.3,
             decoration: BoxDecoration(
-              color: selectedIndex == 1 ? Colours().accentColor : Colors.white,
+              color: selectedIndex == 1
+                  ? Theme.of(context).primaryColor
+                  : Colors.white,
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10),
             ),
@@ -79,7 +85,7 @@ class _SelectFuelWidgetState extends State<SelectFuelWidget> {
                         fontWeight: FontWeight.w700,
                         color: selectedIndex == 1
                             ? Colors.white
-                            : Colours().kTextColor,
+                            : Theme.of(context).textTheme.bodyText1!.color,
                       ),
                 ),
               ],
@@ -89,6 +95,7 @@ class _SelectFuelWidgetState extends State<SelectFuelWidget> {
         GestureDetector(
           onTap: () => setState(() {
             selectedIndex = 2;
+            Navigator.of(context).pushNamed(RouteName.PersistentNavBar);
           }),
           child: Container(
             height: widget.height * 0.5,
@@ -96,7 +103,9 @@ class _SelectFuelWidgetState extends State<SelectFuelWidget> {
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10),
-              color: selectedIndex == 2 ? Colours().accentColor : Colors.white,
+              color: selectedIndex == 2
+                  ? Theme.of(context).primaryColor
+                  : Colors.white,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -106,13 +115,13 @@ class _SelectFuelWidgetState extends State<SelectFuelWidget> {
                   scale: 0.7,
                 ),
                 Text(
-                  "Cng",
+                  "CNG",
                   style: Theme.of(context).textTheme.bodyText2!.copyWith(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
                         color: selectedIndex == 2
                             ? Colors.white
-                            : Colours().kTextColor,
+                            : Theme.of(context).textTheme.bodyText1!.color,
                       ),
                 ),
               ],

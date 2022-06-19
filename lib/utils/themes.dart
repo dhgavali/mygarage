@@ -1,17 +1,15 @@
-import 'package:bee/utils/colours.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Themes {
   ThemeData lightTheme = ThemeData(
+    primaryColor: Color(0xFFFF0000),
     textTheme: TextTheme(
       bodyText1: GoogleFonts.roboto(
-        fontSize: 18,
-        color: Colours().kTextColor,
+        color: Color(0xFF999999),
       ),
       bodyText2: GoogleFonts.openSans(
-        fontSize: 18,
-        color: Colours().kTextColor,
+        color: Color(0xFF999999),
       ),
     ),
   );

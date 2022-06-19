@@ -1,4 +1,4 @@
-import 'package:bee/utils/colours.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 
@@ -44,6 +44,7 @@ class SosScreen extends StatelessWidget {
                   width: width * 0.95,
                   height: height * 0.25,
                   decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
                           image: AssetImage("assets/images/mask.png"),
                           fit: BoxFit.cover)),
@@ -98,7 +99,7 @@ class SosScreen extends StatelessWidget {
                 width: width * 0.5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colours().accentColor,
+                  color: Theme.of(context).primaryColor,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -153,35 +154,36 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: height * 0.09,
-      color: Colours().accentColor,
+      color: Theme.of(context).primaryColor,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             children: [
               Icon(
                 Icons.menu,
                 color: Colors.white,
-                size: 30,
+                size: height * 0.025,
               ),
               const SizedBox(width: 10),
-              Text(
-                "BEE",
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white),
+              AutoSizeText(
+                "My Garage",
+                maxFontSize: 16,
+                minFontSize: 5,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2!
+                    .copyWith(fontWeight: FontWeight.w700, color: Colors.white),
               ),
               const SizedBox(width: 10),
-              Icon(
-                Icons.notifications_none_outlined,
-                color: Colors.white,
-                size: 25,
-              ),
+              Icon(Icons.notifications_none_outlined,
+                  color: Colors.white, size: height * 0.02),
               Spacer(),
               Container(
                 alignment: Alignment.center,
-                height: 50,
+                height: height * 0.065,
                 width: width * 0.3,
                 decoration: BoxDecoration(
                     color: Colors.white,
@@ -200,25 +202,33 @@ class CustomAppBar extends StatelessWidget {
               Icon(
                 Icons.location_pin,
                 color: Colors.white,
-                size: 18,
+                size: height * 0.025,
               ),
               SizedBox(width: 10),
-              Text(
+              AutoSizeText(
                 "Patna, Bihar",
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white),
+                maxLines: 1,
+                maxFontSize: 12,
+                minFontSize: 5,
+                overflow: TextOverflow.clip,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2!
+                    .copyWith(fontWeight: FontWeight.w600, color: Colors.white),
               ),
               SizedBox(width: 10),
-              Text(
+              AutoSizeText(
                 "Mahendra Thar (Diesel)",
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white),
+                maxLines: 1,
+                maxFontSize: 12,
+                minFontSize: 5,
+                overflow: TextOverflow.clip,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2!
+                    .copyWith(fontWeight: FontWeight.w600, color: Colors.white),
               ),
-              SizedBox(width: 5),
+              const SizedBox(width: 5),
             ],
           ),
         ],

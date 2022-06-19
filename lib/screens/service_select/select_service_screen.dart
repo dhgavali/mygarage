@@ -30,7 +30,7 @@ class SelectServiceScreen extends StatelessWidget {
             Positioned(
               top: _height * 0.015,
               child: Text(
-                "BEE",
+                "My Garage",
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2!
@@ -109,7 +109,7 @@ class SelectServiceScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: _height * 0.85,
+              top: _height * 0.87,
               child: Text(
                 "Please Select Any One",
                 style: Theme.of(context)

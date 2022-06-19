@@ -1,4 +1,3 @@
-import 'package:bee/utils/colours.dart';
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSize {
@@ -9,7 +8,7 @@ class MyAppBar extends StatelessWidget implements PreferredSize {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colours().accentColor,
+      backgroundColor: Theme.of(context).primaryColor,
       title: Text(title),
       centerTitle: true,
       elevation: 0.0,
@@ -35,14 +34,14 @@ class MyBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 8,
-      margin: const EdgeInsets.all(12),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+      margin: const EdgeInsets.all(14),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       child: Container(
         child: GestureDetector(
           onTap: () => Navigator.pop(context),
           child: Icon(
             Icons.arrow_back_ios_new_rounded,
-            size: 20,
+            size: 15,
             color: Colors.black,
           ),
         ),

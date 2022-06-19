@@ -1,11 +1,9 @@
-import 'package:bee/main.dart';
 import 'package:bee/screens/service_select/widgets/appbar.dart';
 import 'package:bee/screens/service_select/widgets/select_fuel_widget.dart';
 import 'package:bee/screens/service_select/widgets/select_model_widget.dart';
-import 'package:bee/utils/colours.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/search_bar.dart';
+import '../../global_widgets/search_bar.dart';
 import 'widgets/select_brand_widget.dart';
 
 class VechicleBrandModel extends StatefulWidget {
@@ -36,9 +34,9 @@ class _VechicleBrandModelState extends State<VechicleBrandModel>
           SearchBar(height: _height, width: _width),
           Container(
             child: TabBar(
-              labelColor: Colours().accentColor,
+              labelColor: Theme.of(context).primaryColor,
               unselectedLabelColor: Colors.black,
-              indicatorColor: Colours().accentColor,
+              indicatorColor: Theme.of(context).primaryColor,
               indicatorSize: TabBarIndicatorSize.label,
               controller: _tabController,
               tabs: [

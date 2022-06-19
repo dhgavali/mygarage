@@ -33,7 +33,7 @@ class ServiceButton extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           CircleAvatar(
-            radius: width * 0.15,
+            radius: height * 0.06,
             backgroundColor: Colors.transparent,
             backgroundImage: AssetImage("assets/images/circles.png"),
             child: ConstrainedBox(
