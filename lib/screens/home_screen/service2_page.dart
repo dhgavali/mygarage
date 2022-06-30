@@ -1,11 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bee/global_widgets/search_bar.dart';
-import 'package:card_swiper/card_swiper.dart';
+import 'package:bee/screens/cart_screen/empty_cart.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../../global_widgets/cutom_appbar.dart';
 import 'home_page.dart';
 
+/// page to select services to add inside the cart
 class ServiceTwoPage extends StatelessWidget {
   const ServiceTwoPage({Key? key}) : super(key: key);
 
@@ -43,11 +45,23 @@ class ServiceTwoPage extends StatelessWidget {
                         ),
                       ),
                       Divider(height: height * 0.01, color: Colors.transparent),
-                      MostPopular(height: height, width: width),
+                      MostPopular(
+                        height: height,
+                        width: width,
+                        onpress: () {},
+                      ),
                       Divider(height: height * 0.01, color: Colors.transparent),
-                      MostPopular(height: height, width: width),
+                      MostPopular(
+                        height: height,
+                        width: width,
+                        onpress: () {},
+                      ),
                       Divider(height: height * 0.01, color: Colors.transparent),
-                      MostPopular(height: height, width: width),
+                      MostPopular(
+                        height: height,
+                        width: width,
+                        onpress: () {},
+                      ),
                       Divider(height: height * 0.01, color: Colors.transparent),
                       AutoSizeText(
                         "Trending",
@@ -250,8 +264,9 @@ class MostPopular extends StatelessWidget {
     Key? key,
     required this.height,
     required this.width,
+    required this.onpress,
   }) : super(key: key);
-
+  final Function onpress;
   final double height;
   final double width;
 
@@ -259,82 +274,90 @@ class MostPopular extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
-      child: Container(
-        height: height * 0.2,
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              alignment: Alignment.topCenter,
-              width: width * 0.35,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/service.png"),
-                    fit: BoxFit.cover),
-              ),
-              child: Container(
-                height: 20,
-                alignment: Alignment.center,
-                color: Theme.of(context).primaryColor,
-                child: AutoSizeText(
-                  "Most Popular",
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        color: Colors.white,
-                      ),
+      child: GestureDetector(
+        onTap: () {
+          //TODO: add to cart
+          pushNewScreen(context,
+              screen: EmptyCart(),
+              pageTransitionAnimation: PageTransitionAnimation.cupertino);
+        },
+        child: Container(
+          height: height * 0.2,
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                alignment: Alignment.topCenter,
+                width: width * 0.35,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/service.png"),
+                      fit: BoxFit.cover),
+                ),
+                child: Container(
+                  height: 20,
+                  alignment: Alignment.center,
+                  color: Theme.of(context).primaryColor,
+                  child: AutoSizeText(
+                    "Most Popular",
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          color: Colors.white,
+                        ),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(width: 10),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        AutoSizeText(
-                          "Complete Car Service",
-                          maxFontSize: 22,
-                          minFontSize: 10,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1!
-                              .copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black),
-                        ),
-                        AutoSizeText(
-                          "Rs 699",
-                          maxFontSize: 22,
-                          minFontSize: 10,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1!
-                              .copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color: Theme.of(context).primaryColor),
-                        ),
-                        AutoSizeText(
-                          "Save upto Rs 299",
-                          maxFontSize: 12,
-                          minFontSize: 10,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText1!
-                              .copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.green),
-                        ),
-                      ],
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ],
+              SizedBox(width: 10),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          AutoSizeText(
+                            "Complete Car Service",
+                            maxFontSize: 22,
+                            minFontSize: 10,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black),
+                          ),
+                          AutoSizeText(
+                            "Rs 699",
+                            maxFontSize: 22,
+                            minFontSize: 10,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: Theme.of(context).primaryColor),
+                          ),
+                          AutoSizeText(
+                            "Save upto Rs 299",
+                            maxFontSize: 12,
+                            minFontSize: 10,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1!
+                                .copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.green),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

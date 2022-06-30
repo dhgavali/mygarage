@@ -359,7 +359,7 @@ class _SignupPageState extends State<SignupPage> {
                   width: size.width * 0.25,
                 ),
                 Text(
-                  "Don’t have an account?",
+                  "Already have an account?",
                   style: Theme.of(context).textTheme.displaySmall!.copyWith(
                       color: Colors.black,
                       fontSize: 14,

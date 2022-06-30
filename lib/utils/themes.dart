@@ -11,6 +11,9 @@ class Themes {
       bodyText2: GoogleFonts.openSans(
         color: Color(0xFF999999),
       ),
+      subtitle2: GoogleFonts.openSans(
+        color: Color(0xFF999999),
+      ),
     ),
   );
 }

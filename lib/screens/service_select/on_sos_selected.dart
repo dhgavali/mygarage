@@ -7,6 +7,7 @@ class SelectSOSScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("inside sos");
     var _height = MediaQuery.of(context).size.height;
     var _width = MediaQuery.of(context).size.width;
     return Scaffold(

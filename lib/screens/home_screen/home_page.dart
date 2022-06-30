@@ -1,10 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bee/global_widgets/search_bar.dart';
 import 'package:bee/screens/home_screen/service1_page.dart';
-import 'package:bee/utils/routes.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import '../sos_screen/sos_screen.dart';
 

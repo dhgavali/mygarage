@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
 class SearchBar extends StatelessWidget {
-  const SearchBar({
-    Key? key,
-    required double height,
-    required double width,
-  })  : _height = height,
+  const SearchBar(
+      {Key? key,
+      required double height,
+      required double width,
+      String hint = "Search Here"})
+      : _height = height,
         _width = width,
+        hint = hint,
         super(key: key);
 
   final double _height;
+  final String hint;
   final double _width;
 
   @override
@@ -29,7 +32,7 @@ class SearchBar extends StatelessWidget {
               child: TextField(
                 cursorColor: Colors.black,
                 decoration: InputDecoration.collapsed(
-                  hintText: "Search Here",
+                  hintText: hint,
                 ),
               )),
           Card(

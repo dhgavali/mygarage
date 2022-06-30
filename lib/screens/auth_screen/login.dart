@@ -8,11 +8,9 @@ class LoginPage extends StatelessWidget {
 
   final _controller = TextEditingController();
   String _phoneNumber = "";
-
   void get_otp_button(BuildContext ctx) {
     _phoneNumber = _controller.text;
   }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -29,7 +27,6 @@ class LoginPage extends StatelessWidget {
               stops: [0.5, 0]),
         ),
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               height: size.height * 0.15,
