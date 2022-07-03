@@ -1,27 +1,95 @@
+import 'package:bee/global_widgets/custom_scaffold.dart';
 import 'package:bee/global_widgets/cutom_appbar.dart';
+import 'package:bee/screens/cart_screen/widgets.dart';
 import 'package:bee/screens/service_select/widgets/appbar.dart';
+import 'package:bee/screens/service_select/widgets/service_button.dart';
 import 'package:bee/utils/constants.dart';
+import 'package:bee/utils/validators.dart';
 import 'package:flutter/material.dart';
 
-class AccountDetails extends StatelessWidget {
-  const AccountDetails({Key? key}) : super(key: key);
+class AccountDetails extends StatefulWidget {
+  @override
+  State<AccountDetails> createState() => _AccountDetailsState();
+}
 
+class _AccountDetailsState extends State<AccountDetails> {
+  TextEditingController _nameContro = TextEditingController();
+  TextEditingController _phoneContro = TextEditingController();
+  TextEditingController _emailContro = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+
     return SafeArea(
       child: Scaffold(
+        drawer: MyDrawer(),
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
-        body: Container(
-          child: Column(
-            children: [
-              CustomAppBar(height: height, width: width),
-              profileBanner(
-                width: width,
-                height: height,
-              ),
-            ],
+        body: GestureDetector(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          child: Container(
+            child: Column(
+              children: [
+                Column(
+                  children: [
+                    CustomAppBar(height: height, width: width),
+                    profileBanner(
+                      width: width,
+                      height: height,
+                    ),
+                    Divider(height: height * 0.05, color: Colors.transparent),
+                  ],
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    width: width,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          cInputField(
+                            label: "Full Name",
+                            context: context,
+                            hint: "Shubham Verma",
+                            txController: _nameContro,
+                            valids: Validators.novalid,
+                          ),
+                          cInputField(
+                            label: "Phone Number",
+                            context: context,
+                            hint: "+91-8984585125",
+                            txController: _phoneContro,
+                            keyboard: TextInputType.phone,
+                            valids: Validators.mobValid,
+                          ),
+                          cInputField(
+                            label: "Email Id",
+                            context: context,
+                            hint: "abc@gmail.com",
+                            txController: _emailContro,
+                            keyboard: TextInputType.emailAddress,
+                            valids: Validators.emailValid,
+                          ),
+                          Divider(
+                              height: height * 0.05, color: Colors.transparent),
+                          LongButton(
+                              width: width * 0.9,
+                              height: 40,
+                              title: "Update",
+                              onpress: () {
+                                Navigator.of(context).maybePop();
+                              }),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -43,7 +111,7 @@ class AccountDetails extends StatelessWidget {
           AppBar(
             backgroundColor: Colors.transparent,
             title: Text(
-              "My Profile",
+              "Account Details",
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.grey.shade600,
@@ -54,46 +122,20 @@ class AccountDetails extends StatelessWidget {
             leading: MyBackButton(),
           ),
           Container(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(5),
             decoration: BoxDecoration(
               border: Border.all(
                 color: Colors.grey,
-                width: 2,
+                width: 5,
               ),
               shape: BoxShape.circle,
             ),
             alignment: Alignment.center,
-            child: Stack(
-              children: [
-                CircleAvatar(
-                  maxRadius: 25,
-                  minRadius: 20,
-                  backgroundColor: Colors.transparent,
-                  backgroundImage: AssetImage("assets/images/cart.png"),
-                ),
-                Positioned(
-                  bottom: 5,
-                  right: 8,
-                  child: InkWell(
-                    onTap: () {},
-                    child: Container(
-                      padding: EdgeInsets.all(5.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(
-                          width: 3.0,
-                          color: Color(0xffa1a1a1),
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.edit,
-                        size: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+            child: CircleAvatar(
+              maxRadius: 25,
+              minRadius: 20,
+              backgroundColor: Colors.transparent,
+              backgroundImage: AssetImage("assets/images/profile.png"),
             ),
           ),
           SizedBox(

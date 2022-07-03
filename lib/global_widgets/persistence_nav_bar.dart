@@ -1,4 +1,4 @@
-import 'package:bee/screens/cart_screen/filled_cart.dart';
+import 'package:bee/screens/cart_screen/empty_cart.dart';
 import 'package:bee/screens/home_screen/home_page.dart';
 import 'package:bee/screens/profile_screen/profile.dart';
 import 'package:bee/screens/sos_screen/sos_screen.dart';
@@ -72,7 +72,7 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
         HomePage(),
         // HomePage(),
         SosScreen(),
-        FilledCart(),
+        EmptyCart(),
         ProfilePage(),
       ],
       items: items,

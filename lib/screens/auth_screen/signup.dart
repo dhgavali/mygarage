@@ -1,6 +1,6 @@
-import 'package:bee/screens/auth_screen/login.dart';
 import 'package:bee/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 class SignupPage extends StatefulWidget {
   static const routeName = "signup";
@@ -40,11 +40,14 @@ class _SignupPageState extends State<SignupPage> {
         height: size.height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Theme.of(context).primaryColor, Colors.white],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: const [0.5, 0],
-          ),
+              colors: [Theme.of(context).primaryColor, Colors.white],
+              // begin: Alignment.topLeft,
+              // end: Alignment.bottomRight,
+              // stops: const [0.5, 0],
+              begin: FractionalOffset.topLeft,
+              transform: GradientRotation(math.pi / -7.5),
+              end: FractionalOffset.bottomRight,
+              stops: [0.6, 0]),
         ),
         child: Column(
           // crossAxisAlignment: CrossAxisAlignment.center,

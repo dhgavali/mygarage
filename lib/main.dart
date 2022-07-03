@@ -2,8 +2,6 @@ import 'package:bee/global_widgets/persistence_nav_bar.dart';
 import 'package:bee/screens/auth_screen/login.dart';
 import 'package:bee/screens/auth_screen/signup.dart';
 import 'package:bee/screens/home_screen/home_page.dart';
-import 'package:bee/screens/home_screen/service1_page.dart';
-import 'package:bee/screens/home_screen/service2_page.dart';
 import 'package:bee/screens/service_select/on_sos_selected.dart';
 import 'package:bee/screens/service_select/select_vehicle.dart';
 import 'package:bee/screens/service_select/select_service_screen.dart';

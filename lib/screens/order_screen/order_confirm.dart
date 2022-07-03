@@ -3,10 +3,10 @@ import 'package:bee/screens/cart_screen/widgets.dart';
 import 'package:bee/screens/order_screen/widgets.dart';
 import 'package:bee/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:bee/global_widgets/custom_scaffold.dart';
 
 import 'package:bee/global_widgets/cutom_appbar.dart';
 import 'package:bee/screens/service_select/widgets/appbar.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class OrderConfirm extends StatefulWidget {
   @override
@@ -20,6 +20,7 @@ class OrderConfirmState extends State<OrderConfirm> {
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        drawer: MyDrawer(),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Column(
@@ -52,7 +53,14 @@ class OrderConfirmState extends State<OrderConfirm> {
               Container(
                 alignment: Alignment.center,
                 height: width * 0.3,
-                child: Text("Order stepper"),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Consts().greyColor.withOpacity(0.2),
+                  ),
+                ),
+                child: Text(
+                  "Order stepper",
+                ),
               ),
               SizedBox(
                 height: 10,

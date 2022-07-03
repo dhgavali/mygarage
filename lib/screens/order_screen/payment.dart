@@ -3,6 +3,7 @@ import 'package:bee/screens/order_screen/add_card.dart';
 import 'package:bee/screens/order_screen/img_verify.dart';
 import 'package:bee/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:bee/global_widgets/custom_scaffold.dart';
 
 import 'package:bee/global_widgets/cutom_appbar.dart';
 import 'package:bee/screens/service_select/widgets/appbar.dart';
@@ -22,6 +23,7 @@ class PaymentPageState extends State<PaymentPage> {
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        drawer: MyDrawer(),
         backgroundColor: Colors.white,
         floatingActionButton: ContinueBtn(onpres: () {
           pushNewScreen(context,
@@ -47,15 +49,23 @@ class PaymentPageState extends State<PaymentPage> {
                 elevation: 0.0,
                 leading: MyBackButton(),
               ),
-              Divider(height: height * 0.01, color: Colors.transparent),
+              Divider(height: height * 0.005, color: Colors.transparent),
               myContainer(
+                customPadding: EdgeInsets.symmetric(
+                  vertical: 5,
+                  horizontal: 10,
+                ),
+                customMargin: EdgeInsets.symmetric(
+                  vertical: 5,
+                ),
                 width: width,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 10.0, bottom: 10),
-                      child: Consts.titleText(text: "UPI Payment"),
+                      padding: const EdgeInsets.only(left: 10.0, bottom: 5),
+                      child: Consts.titleText3(
+                          minfsize: Consts.stitle1, text: "UPI Payment"),
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.min,
@@ -66,22 +76,31 @@ class PaymentPageState extends State<PaymentPage> {
                         _paytm(),
                         _gpay(),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
               myContainer(
+                customPadding: EdgeInsets.symmetric(
+                  vertical: 5,
+                  horizontal: 10,
+                ),
+                customMargin: EdgeInsets.symmetric(
+                  vertical: 5,
+                ),
                 width: width,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0, bottom: 10),
-                      child: Consts.titleText(text: "Pay After Service"),
+                      child: Consts.titleText3(
+                          minfsize: Consts.stitle1, text: "Pay After Service"),
                     ),
                     RadioListTile(
                         value: "pay at garage",
                         groupValue: service,
+                        activeColor: Consts().primaryColor,
                         controlAffinity: ListTileControlAffinity.trailing,
                         title: Row(children: [
                           Icon(
@@ -90,7 +109,9 @@ class PaymentPageState extends State<PaymentPage> {
                           SizedBox(
                             width: 10,
                           ),
-                          Text("Pay at garage"),
+                          Consts.titleText3(
+                            text: "Pay at garage",
+                          ),
                         ]),
                         onChanged: (value) {
                           setState(() {
@@ -102,16 +123,25 @@ class PaymentPageState extends State<PaymentPage> {
               ),
               myContainer(
                 width: width,
+                customPadding: EdgeInsets.symmetric(
+                  vertical: 5,
+                  horizontal: 10,
+                ),
+                customMargin: EdgeInsets.symmetric(
+                  vertical: 5,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0, bottom: 10),
-                      child: Consts.titleText(text: "Pay After Service"),
+                      child: Consts.titleText3(
+                          minfsize: Consts.stitle1, text: "Pay After Service"),
                     ),
                     RadioListTile(
                         value: "card",
                         groupValue: service,
+                        activeColor: Consts().primaryColor,
                         controlAffinity: ListTileControlAffinity.trailing,
                         title: Row(children: [
                           Icon(
@@ -120,7 +150,9 @@ class PaymentPageState extends State<PaymentPage> {
                           SizedBox(
                             width: 10,
                           ),
-                          Text("Visa / MasterCard"),
+                          Consts.titleText3(
+                            text: "Visa / Master card",
+                          ),
                         ]),
                         onChanged: (value) {
                           setState(() {
@@ -132,12 +164,17 @@ class PaymentPageState extends State<PaymentPage> {
               ),
               myContainer(
                 width: width,
+                customPadding: EdgeInsets.symmetric(
+                  vertical: 5,
+                  horizontal: 10,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 10.0, bottom: 10),
-                      child: Consts.titleText(text: "Wallet"),
+                      child: Consts.titleText3(
+                          minfsize: Consts.stitle1, text: "Wallet"),
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.min,
@@ -151,6 +188,9 @@ class PaymentPageState extends State<PaymentPage> {
                     )
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 150,
               ),
             ],
           ),
@@ -177,11 +217,13 @@ class PaymentPageState extends State<PaymentPage> {
             ),
             child: Image(image: AssetImage("assets/images/paytm.png")),
           ),
+          SizedBox(
+            height: 5,
+          ),
           Text(
             "Paytm",
             style: GoogleFonts.openSans(
-              fontWeight: FontWeight.bold,
-            ),
+                fontWeight: FontWeight.bold, fontSize: Consts.stitle2),
           ),
         ],
       ),
@@ -206,10 +248,14 @@ class PaymentPageState extends State<PaymentPage> {
             ),
             child: Image(image: AssetImage("assets/images/paytm.png")),
           ),
+          SizedBox(
+            height: 5,
+          ),
           Text(
             "G-Pay",
             style: GoogleFonts.openSans(
               fontWeight: FontWeight.bold,
+              fontSize: Consts.stitle2,
             ),
           ),
         ],

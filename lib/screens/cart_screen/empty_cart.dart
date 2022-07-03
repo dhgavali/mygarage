@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:bee/screens/cart_screen/add_issue.dart';
 import 'package:bee/screens/home_screen/service2_page.dart';
 import 'package:bee/screens/service_select/widgets/service_button.dart';
 import 'package:flutter/material.dart';
+import 'package:bee/global_widgets/custom_scaffold.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../../global_widgets/cutom_appbar.dart';
@@ -11,10 +11,11 @@ import '../../global_widgets/cutom_appbar.dart';
 class EmptyCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-        var width = MediaQuery.of(context).size.width;
-        var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        drawer: MyDrawer(),
         // TODO: make global
         backgroundColor: Colors.white,
         body: Column(
@@ -101,7 +102,7 @@ class EmptyCart extends StatelessWidget {
                             height: 40,
                             onpress: () {
                               pushNewScreen(context,
-                                  screen: PopIssue(),
+                                  screen: ServiceTwoPage(),
                                   pageTransitionAnimation:
                                       PageTransitionAnimation.cupertino);
                             },

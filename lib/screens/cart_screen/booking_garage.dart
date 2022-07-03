@@ -3,6 +3,7 @@ import 'package:bee/screens/cart_screen/filled_cart.dart';
 import 'package:bee/screens/service_select/widgets/appbar.dart';
 import 'package:bee/screens/service_select/widgets/service_button.dart';
 import 'package:flutter/material.dart';
+import 'package:bee/global_widgets/custom_scaffold.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../../global_widgets/cutom_appbar.dart';
@@ -17,6 +18,7 @@ class BookingGarageCart extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        drawer: MyDrawer(),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

@@ -3,6 +3,7 @@ import 'package:bee/screens/cart_screen/booking_services.dart';
 import 'package:bee/screens/cart_screen/widgets.dart';
 import 'package:bee/screens/service_select/widgets/service_button.dart';
 import 'package:flutter/material.dart';
+import 'package:bee/global_widgets/custom_scaffold.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:bee/utils/constants.dart';
 
@@ -22,56 +23,59 @@ class _FilledCartState extends State<FilledCart> {
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
         child: Scaffold(
+      drawer: MyDrawer(),
       backgroundColor: Colors.white,
-      body: Column(mainAxisSize: MainAxisSize.min, children: [
-        CustomAppBar(height: height, width: width),
-        Divider(height: height * 0.02, color: Colors.transparent),
-        Expanded(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Center(
-              child: AutoSizeText(
-                "Cart",
-                maxFontSize: 22,
-                minFontSize: 10,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1!
-                    .copyWith(fontWeight: FontWeight.w700),
+      body: SingleChildScrollView(
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          CustomAppBar(height: height, width: width),
+          Divider(height: height * 0.02, color: Colors.transparent),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: AutoSizeText(
+                  "Cart",
+                  maxFontSize: 22,
+                  minFontSize: 10,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1!
+                      .copyWith(fontWeight: FontWeight.w700),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ServiceAddBox(
-              width: width,
-              height: height,
-            ),
-            // TODO: package box
-            IssueCard(width: width, height: height),
-            FreqAddBox(
-              width: width,
-              height: height,
-            ),
-            CartPriceTotal(
-              width: width,
-              height: height,
-            ),
-
-            LongButton(
+              SizedBox(
+                height: 10,
+              ),
+              ServiceAddBox(
                 width: width,
-                height: 40,
-                title: "Continue",
-                onpress: () {
-                  pushNewScreen(context,
-                      screen: BookingServicesCart(),
-                      pageTransitionAnimation:
-                          PageTransitionAnimation.cupertino);
-                }),
-          ],
-        ))
-      ]),
+                height: height,
+              ),
+              // TODO: package box
+              IssueCard(width: width, height: height),
+              FreqAddBox(
+                width: width,
+                height: height,
+              ),
+              CartPriceTotal(
+                width: width,
+                height: height,
+              ),
+
+              LongButton(
+                  width: width,
+                  height: 40,
+                  title: "Continue",
+                  onpress: () {
+                    pushNewScreen(context,
+                        screen: BookingServicesCart(),
+                        pageTransitionAnimation:
+                            PageTransitionAnimation.cupertino);
+                  }),
+            ],
+          )
+        ]),
+      ),
     ));
   }
 }

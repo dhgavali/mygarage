@@ -1,6 +1,5 @@
 import 'package:bee/utils/routes.dart';
 import 'package:flutter/material.dart';
-
 class SelectFuelWidget extends StatefulWidget {
   final double height;
   final double width;

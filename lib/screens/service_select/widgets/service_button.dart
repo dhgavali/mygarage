@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:bee/screens/service_select/on_sos_selected.dart';
 import 'package:bee/screens/sos_screen/sos_screen.dart';
 import 'package:bee/utils/routes.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,9 @@ class ServiceButton extends StatelessWidget {
             Navigator.of(context).pushNamed(RouteName.Select_SOS_screen);
           } else {
             // Navigator.of(context).pushNamed(RouteName.SOS_screen);
-            pushNewScreen(context, screen: SosScreen());
+            pushNewScreen(context,
+                screen: SosScreen(),
+                pageTransitionAnimation: PageTransitionAnimation.cupertino);
           }
         } else {
           Navigator.of(context).pushNamed(RouteName.Select_vehicle_screen);

@@ -3,6 +3,7 @@ import 'package:bee/screens/service_select/widgets/service_button.dart';
 import 'package:bee/utils/constants.dart';
 import 'package:bee/utils/validators.dart';
 import 'package:flutter/material.dart';
+import 'package:bee/global_widgets/custom_scaffold.dart';
 
 import 'package:bee/global_widgets/cutom_appbar.dart';
 import 'package:bee/screens/service_select/widgets/appbar.dart';
@@ -23,6 +24,7 @@ class AddDebitCardState extends State<AddDebitCard> {
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        drawer: MyDrawer(),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Column(

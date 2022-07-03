@@ -1,5 +1,6 @@
 import 'package:bee/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 class LoginPage extends StatelessWidget {
   static const routeName = "login";
@@ -11,6 +12,7 @@ class LoginPage extends StatelessWidget {
   void get_otp_button(BuildContext ctx) {
     _phoneNumber = _controller.text;
   }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -23,8 +25,9 @@ class LoginPage extends StatelessWidget {
           gradient: LinearGradient(
               colors: [Theme.of(context).primaryColor, Colors.white],
               begin: FractionalOffset.topLeft,
+              transform: GradientRotation(math.pi / -7.5),
               end: FractionalOffset.bottomRight,
-              stops: [0.5, 0]),
+              stops: [0.6, 0]),
         ),
         child: Column(
           children: [

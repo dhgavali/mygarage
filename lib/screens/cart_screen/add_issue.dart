@@ -1,22 +1,23 @@
 import 'package:bee/global_widgets/search_bar.dart';
-import 'package:bee/screens/cart_screen/filled_cart.dart';
+import 'package:bee/screens/cart_screen/widgets.dart';
 import 'package:bee/screens/service_select/widgets/appbar.dart';
 import 'package:bee/screens/service_select/widgets/service_button.dart';
+import 'package:bee/utils/validators.dart';
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'package:bee/global_widgets/custom_scaffold.dart';
 
 import '../../global_widgets/cutom_appbar.dart';
 
 /// page to select services to add inside the cart
 class PopIssue extends StatelessWidget {
-  const PopIssue({Key? key}) : super(key: key);
-
+  TextEditingController _issueContro = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        drawer: MyDrawer(),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -56,17 +57,29 @@ class PopIssue extends StatelessWidget {
                         onChanged: (dynamic) {});
                   })),
             ),
+            Container(
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: cInputField(
+                label: "Other Issue",
+                context: context,
+                hint: "Enter your issue here",
+                txController: _issueContro,
+                valids: Validators.novalid,
+              ),
+            ),
             LongButton(
               width: width,
               height: 40,
               title: "Done",
-              onpress: (){
+              onpress: () {
                 //TODO: issue screen
-                   pushNewScreen(context,
-                                  screen: FilledCart(),
-                                  pageTransitionAnimation:
-                                      PageTransitionAnimation.cupertino);
-                           
+                //  pushNewScreen(context,
+                //                 screen: FilledCart(),
+                //                 pageTransitionAnimation:
+                //                     PageTransitionAnimation.cupertino);
+
+                Navigator.of(context).maybePop();
               },
               bgColor: Color(0xff999999),
             ),

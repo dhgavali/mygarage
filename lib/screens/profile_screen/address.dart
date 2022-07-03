@@ -1,54 +1,35 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bee/global_widgets/custom_scaffold.dart';
+import 'package:bee/global_widgets/cutom_appbar.dart';
 import 'package:bee/screens/cart_screen/edit_address.dart';
 import 'package:bee/screens/cart_screen/widgets.dart';
-import 'package:bee/screens/order_screen/payment.dart';
 import 'package:bee/screens/service_select/widgets/appbar.dart';
-import 'package:flutter/material.dart';
-import 'package:bee/global_widgets/custom_scaffold.dart';
 import 'package:bee/utils/constants.dart';
+import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
-import '../../global_widgets/cutom_appbar.dart';
-
-/// page to select services to add inside the cart
-class BookingServicesCart extends StatefulWidget {
+class ProfileAddress extends StatefulWidget {
   @override
-  State<BookingServicesCart> createState() => _BookingServicesCartState();
+  State<ProfileAddress> createState() => _ProfileAddressState();
 }
 
-class _BookingServicesCartState extends State<BookingServicesCart> {
-  bool _isSelected = false;
-
-  List<String> groupList = ["Primary", "secondary", "other"];
+class _ProfileAddressState extends State<ProfileAddress> {
   String radiovalue = "home";
-
-  int selectedItem = 0;
-
-  bool _deliveryMode = false;
   @override
   Widget build(BuildContext context) {
-    print("booking services");
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
-        drawer: MyDrawer(),
-        floatingActionButton: ContinueBtn(onpres: () {
-          pushNewScreen(context,
-              screen: PaymentPage(),
-              pageTransitionAnimation: PageTransitionAnimation.cupertino);
-        }),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Column(
+          drawer: MyDrawer(),
+          body: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               CustomAppBar(height: height, width: width),
               AppBar(
                 backgroundColor: Colors.white,
                 title: Text(
-                  "Cart",
+                  "Address",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.grey.shade600,
@@ -58,10 +39,10 @@ class _BookingServicesCartState extends State<BookingServicesCart> {
                 elevation: 0.0,
                 leading: MyBackButton(),
               ),
-              Divider(height: height * 0.01, color: Colors.transparent),
-              _pickUpLocation(width),
-              _deliveryType(width),
-              // _addressBox(width, context),
+              Divider(
+                height: height * 0.01,
+                color: Colors.transparent,
+              ),
               myContainer(
                 width: width,
                 child: Column(
@@ -69,7 +50,7 @@ class _BookingServicesCartState extends State<BookingServicesCart> {
                   children: [
                     Consts.titleText3(minfsize: 12, text: "Select Address"),
                     Container(
-                      height: 225,
+                      height: 210,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
@@ -85,10 +66,11 @@ class _BookingServicesCartState extends State<BookingServicesCart> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           CircleAvatar(
-                            minRadius: 12,
+                            minRadius: 10,
                             backgroundColor: Consts().greyColor,
                             child: Icon(
                               Icons.add,
+                              size: 12,
                               color: Colors.white,
                             ),
                           ),
@@ -99,9 +81,7 @@ class _BookingServicesCartState extends State<BookingServicesCart> {
                 ),
               ),
             ],
-          ),
-        ),
-      ),
+          )),
     );
   }
 
@@ -171,109 +151,6 @@ class _BookingServicesCartState extends State<BookingServicesCart> {
             )
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _pickUpLocation(double width) {
-    return myContainer(
-      customPadding: EdgeInsets.zero,
-      child: ListTile(
-        minVerticalPadding: 2,
-        trailing: Icon(
-          Icons.arrow_forward_ios,
-          color: Consts().primaryColor,
-        ),
-        title: AutoSizeText(
-          "Pick Up Location",
-          minFontSize: 12,
-          maxFontSize: 24,
-          style: TextStyle(
-            fontSize: Consts.stitle2,
-            color: Consts.kprimary,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        subtitle: Row(children: [
-          Icon(
-            Icons.location_on,
-            color: Consts().primaryColor,
-            size: 12,
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          Text(
-            "Sector-03 Patna, Bihar",
-            style: Consts.greyFont(Consts.stitle2),
-          ),
-        ]),
-      ),
-      width: width,
-      borderColor: Colors.red,
-    );
-  }
-
-  Widget _deliveryType(double width) {
-    return myContainer(
-      width: width,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Consts.titleText3(
-              minfsize: 12,
-              text: "Delivery Type",
-            ),
-          ),
-          Row(
-            children: [
-              selectBox(
-                title: "Self Deliver",
-                isSelected: !_deliveryMode,
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              selectBox(
-                title: "Pick up By Bee Mechanic",
-                isSelected: _deliveryMode,
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget selectBox({
-    required String title,
-    required bool isSelected,
-    double? width,
-  }) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _deliveryMode = !_deliveryMode;
-        });
-      },
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 8.0),
-        decoration: BoxDecoration(
-          color: isSelected ? Consts().primaryColor : Colors.white,
-          border: Border.all(
-            color: isSelected
-                ? Consts().primaryColor
-                : Consts().greyColor.withOpacity(0.2),
-          ),
-          borderRadius: BorderRadius.circular(5),
-        ),
-        padding: EdgeInsets.all(10),
-        child: Consts.titleText3(
-            minfsize: 12,
-            text: title,
-            color: isSelected ? Colors.white : Consts().greyColor),
       ),
     );
   }

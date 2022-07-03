@@ -1,7 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bee/global_widgets/search_bar.dart';
-import 'package:bee/screens/cart_screen/empty_cart.dart';
+import 'package:bee/screens/cart_screen/filled_cart.dart';
 import 'package:flutter/material.dart';
+import 'package:bee/global_widgets/custom_scaffold.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 import '../../global_widgets/cutom_appbar.dart';
@@ -17,6 +18,7 @@ class ServiceTwoPage extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        drawer: MyDrawer(),
         body: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -278,7 +280,7 @@ class MostPopular extends StatelessWidget {
         onTap: () {
           //TODO: add to cart
           pushNewScreen(context,
-              screen: EmptyCart(),
+              screen: FilledCart(),
               pageTransitionAnimation: PageTransitionAnimation.cupertino);
         },
         child: Container(

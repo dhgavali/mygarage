@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:bee/screens/order_screen/payment.dart';
+import 'package:bee/screens/cart_screen/add_issue.dart';
 import 'package:bee/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,13 +42,21 @@ class IssueCard extends StatelessWidget {
                   ),
                 ],
               ),
-              AutoSizeText(
-                "Select",
-                maxFontSize: 22,
-                minFontSize: 10,
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    fontWeight: FontWeight.w900,
-                    color: Theme.of(context).primaryColor),
+              GestureDetector(
+                onTap: () {
+                  pushNewScreen(context,
+                      screen: PopIssue(),
+                      pageTransitionAnimation:
+                          PageTransitionAnimation.cupertino);
+                },
+                child: AutoSizeText(
+                  "Select",
+                  maxFontSize: 22,
+                  minFontSize: 10,
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                      fontWeight: FontWeight.w900,
+                      color: Theme.of(context).primaryColor),
+                ),
               ),
             ],
           ),
@@ -126,9 +134,10 @@ Widget myContainer({
   required double width,
   Color? borderColor,
   EdgeInsetsGeometry? customPadding,
+  EdgeInsetsGeometry? customMargin,
 }) {
   return Container(
-    margin: EdgeInsets.symmetric(vertical: 10),
+    margin: customMargin ?? EdgeInsets.symmetric(vertical: 10),
     width: width * 0.95,
     decoration: BoxDecoration(
       border:
@@ -204,3 +213,62 @@ Widget ContinueBtn({required Function() onpres}) {
     ),
   );
 }
+
+Widget cInputField({
+  required String label,
+  required BuildContext context,
+  required String hint,
+  required TextEditingController txController,
+  required String? valids(String? value),
+  TextInputType keyboard = TextInputType.name,
+}) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Consts.titleText(text: label),
+      Container(
+        width: MediaQuery.of(context).size.width * 0.8,
+        margin: EdgeInsets.symmetric(vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(
+            color: Consts().greyColor.withOpacity(0.2),
+          ),
+        ),
+        child: TextFormField(
+          validator: valids,
+          keyboardType: keyboard,
+          controller: txController,
+          cursorColor: Colors.black,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+
+            // fillColor: Constant.kprimary,
+            border: OutlineInputBorder(),
+            fillColor: Colors.white,
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: (Colors.white), width: 2.0),
+              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+            ),
+
+            hintText: hint,
+            hintStyle: TextStyle(
+              color: Colors.grey.shade500,
+              fontSize: 16,
+            ),
+          ),
+        ),
+      ),
+      SizedBox(
+        height: 10,
+      ),
+    ],
+  );
+}
+
+
+

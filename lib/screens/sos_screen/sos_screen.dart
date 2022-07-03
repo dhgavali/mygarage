@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:bee/global_widgets/custom_scaffold.dart';
 
 class SosScreen extends StatelessWidget {
   const SosScreen({Key? key}) : super(key: key);
@@ -11,6 +12,7 @@ class SosScreen extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+        drawer: MyDrawer(),
         body: Stack(
           fit: StackFit.passthrough,
           alignment: Alignment.center,
@@ -161,10 +163,18 @@ class CustomAppBar extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                Icons.menu,
-                color: Colors.white,
-                size: height * 0.025,
+              GestureDetector(
+                onTap: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Icon(
+                    Icons.menu,
+                    color: Colors.white,
+                    size: height * 0.025,
+                  ),
+                ),
               ),
               const SizedBox(width: 10),
               AutoSizeText(

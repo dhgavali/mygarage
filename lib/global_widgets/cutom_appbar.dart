@@ -22,10 +22,18 @@ class CustomAppBar extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                Icons.menu,
-                color: Colors.white,
-                size: height * 0.025,
+              GestureDetector(
+                onTap: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Icon(
+                    Icons.menu,
+                    color: Colors.white,
+                    size: height * 0.025,
+                  ),
+                ),
               ),
               const SizedBox(width: 10),
               AutoSizeText(
