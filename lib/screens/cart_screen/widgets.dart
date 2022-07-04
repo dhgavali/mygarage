@@ -133,6 +133,7 @@ Widget myContainer({
   required Widget? child,
   required double width,
   Color? borderColor,
+  Color? boxColor,
   EdgeInsetsGeometry? customPadding,
   EdgeInsetsGeometry? customMargin,
 }) {
@@ -140,6 +141,7 @@ Widget myContainer({
     margin: customMargin ?? EdgeInsets.symmetric(vertical: 10),
     width: width * 0.95,
     decoration: BoxDecoration(
+      color: boxColor ?? Colors.transparent,
       border:
           Border.all(color: borderColor ?? Color(0xff999999).withOpacity(0.2)),
       borderRadius: BorderRadius.circular(5),
@@ -269,6 +271,3 @@ Widget cInputField({
     ],
   );
 }
-
-
-

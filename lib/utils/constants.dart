@@ -83,54 +83,68 @@ class Consts {
   }
 }
 
+List<DropdownMenuItem<String>> get stateNameItems {
+  List<DropdownMenuItem<String>> menuItems = [
+    DropdownMenuItem(child: Text("Andhra Pradesh"), value: "Andhra Pradesh"),
+    DropdownMenuItem(
+        child: Text("Arunachal Pradesh"), value: "Arunachal Pradesh"),
+    DropdownMenuItem(child: Text("Assam"), value: "Assam"),
+    DropdownMenuItem(child: Text("Bihar"), value: "Bihar"),
+    DropdownMenuItem(child: Text("Chhattisgarh"), value: "Chhattisgarh"),
+    DropdownMenuItem(child: Text("Goa"), value: "Goa"),
+    DropdownMenuItem(child: Text("Gujarat"), value: "Gujarat"),
+    DropdownMenuItem(child: Text("Haryana"), value: "Haryana"),
+    DropdownMenuItem(
+        child: Text("Himachal Pradesh"), value: "Himachal Pradesh"),
+    DropdownMenuItem(
+        child: Text("Jammu and Kashmir"), value: "Jammu and Kashmir"),
+    DropdownMenuItem(child: Text("Jharkhand"), value: "Jharkhand"),
+    DropdownMenuItem(child: Text("Karnataka"), value: "Karnataka"),
+    DropdownMenuItem(child: Text("Kerala"), value: "Kerala"),
+    DropdownMenuItem(child: Text("Madhya Pradesh"), value: "Madhya Pradesh"),
+    DropdownMenuItem(child: Text("Maharashtra"), value: "Maharashtra"),
+    DropdownMenuItem(child: Text("Manipur"), value: "Manipur"),
+    DropdownMenuItem(child: Text("Meghalaya"), value: "Meghalaya"),
+    DropdownMenuItem(child: Text("Mizoram"), value: "Mizoram"),
+    DropdownMenuItem(child: Text("Nagaland"), value: "Nagaland"),
+    DropdownMenuItem(child: Text("Odisha"), value: "Odisha"),
+    DropdownMenuItem(child: Text("Punjab"), value: "Punjab"),
+    DropdownMenuItem(child: Text("Rajasthan"), value: "Rajasthan"),
+    DropdownMenuItem(child: Text("Sikkim"), value: "Sikkim"),
+    DropdownMenuItem(child: Text("Tamil Nadu"), value: "Tamil Nadu"),
+    DropdownMenuItem(child: Text("Telangana"), value: "Telangana"),
+    DropdownMenuItem(child: Text("Tripura"), value: "Tripura"),
+    DropdownMenuItem(child: Text("Uttarakhand"), value: "Uttarakhand"),
+    DropdownMenuItem(child: Text("Uttar Pradesh"), value: "Uttar Pradesh"),
+    DropdownMenuItem(child: Text("West Bengal"), value: "West Bengal"),
+    DropdownMenuItem(
+        child: Text("Andaman and Nicobar Islands"),
+        value: "Andaman and Nicobar Islands"),
+    DropdownMenuItem(child: Text("Chandigarh"), value: "Chandigarh"),
+    DropdownMenuItem(
+        child: Text("Dadra and Nagar Haveli"), value: "Dadra and Nagar Haveli"),
+    DropdownMenuItem(child: Text("Daman and Diu"), value: "Daman and Diu"),
+    DropdownMenuItem(child: Text("Delhi"), value: "Delhi"),
+    DropdownMenuItem(child: Text("Lakshadweep"), value: "Lakshadweep"),
+    DropdownMenuItem(child: Text("Puducherry"), value: "Puducherry"),
+  ];
+  return menuItems;
+}
 
-
-
-  List<DropdownMenuItem<String>> get stateNameItems {
-    List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(child: Text("Andhra Pradesh"), value: "Andhra Pradesh"),
-      DropdownMenuItem(
-          child: Text("Arunachal Pradesh"), value: "Arunachal Pradesh"),
-      DropdownMenuItem(child: Text("Assam"), value: "Assam"),
-      DropdownMenuItem(child: Text("Bihar"), value: "Bihar"),
-      DropdownMenuItem(child: Text("Chhattisgarh"), value: "Chhattisgarh"),
-      DropdownMenuItem(child: Text("Goa"), value: "Goa"),
-      DropdownMenuItem(child: Text("Gujarat"), value: "Gujarat"),
-      DropdownMenuItem(child: Text("Haryana"), value: "Haryana"),
-      DropdownMenuItem(
-          child: Text("Himachal Pradesh"), value: "Himachal Pradesh"),
-      DropdownMenuItem(
-          child: Text("Jammu and Kashmir"), value: "Jammu and Kashmir"),
-      DropdownMenuItem(child: Text("Jharkhand"), value: "Jharkhand"),
-      DropdownMenuItem(child: Text("Karnataka"), value: "Karnataka"),
-      DropdownMenuItem(child: Text("Kerala"), value: "Kerala"),
-      DropdownMenuItem(child: Text("Madhya Pradesh"), value: "Madhya Pradesh"),
-      DropdownMenuItem(child: Text("Maharashtra"), value: "Maharashtra"),
-      DropdownMenuItem(child: Text("Manipur"), value: "Manipur"),
-      DropdownMenuItem(child: Text("Meghalaya"), value: "Meghalaya"),
-      DropdownMenuItem(child: Text("Mizoram"), value: "Mizoram"),
-      DropdownMenuItem(child: Text("Nagaland"), value: "Nagaland"),
-      DropdownMenuItem(child: Text("Odisha"), value: "Odisha"),
-      DropdownMenuItem(child: Text("Punjab"), value: "Punjab"),
-      DropdownMenuItem(child: Text("Rajasthan"), value: "Rajasthan"),
-      DropdownMenuItem(child: Text("Sikkim"), value: "Sikkim"),
-      DropdownMenuItem(child: Text("Tamil Nadu"), value: "Tamil Nadu"),
-      DropdownMenuItem(child: Text("Telangana"), value: "Telangana"),
-      DropdownMenuItem(child: Text("Tripura"), value: "Tripura"),
-      DropdownMenuItem(child: Text("Uttarakhand"), value: "Uttarakhand"),
-      DropdownMenuItem(child: Text("Uttar Pradesh"), value: "Uttar Pradesh"),
-      DropdownMenuItem(child: Text("West Bengal"), value: "West Bengal"),
-      DropdownMenuItem(
-          child: Text("Andaman and Nicobar Islands"),
-          value: "Andaman and Nicobar Islands"),
-      DropdownMenuItem(child: Text("Chandigarh"), value: "Chandigarh"),
-      DropdownMenuItem(
-          child: Text("Dadra and Nagar Haveli"),
-          value: "Dadra and Nagar Haveli"),
-      DropdownMenuItem(child: Text("Daman and Diu"), value: "Daman and Diu"),
-      DropdownMenuItem(child: Text("Delhi"), value: "Delhi"),
-      DropdownMenuItem(child: Text("Lakshadweep"), value: "Lakshadweep"),
-      DropdownMenuItem(child: Text("Puducherry"), value: "Puducherry"),
-    ];
-    return menuItems;
+class dashLine extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: List.generate(
+          500 ~/ 3,
+          (index) => Expanded(
+                child: Container(
+                  color: index % 2 == 0
+                      ? Colors.transparent
+                      : Colors.grey.withOpacity(0.5),
+                  height: 1,
+                ),
+              )),
+    );
   }
+}

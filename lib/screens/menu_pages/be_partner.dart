@@ -54,7 +54,7 @@ class _BePartnerState extends State<BePartner> {
                 ],
               ),
               Divider(
-                height: height * 0.01,
+                height: height * 0.02,
                 color: Colors.transparent,
               ),
               Container(

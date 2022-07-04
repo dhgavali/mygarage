@@ -5,6 +5,8 @@ import 'package:bee/screens/order_screen/img_verify.dart';
 import 'package:bee/screens/profile_screen/acc_details.dart';
 import 'package:bee/screens/profile_screen/address.dart';
 import 'package:bee/screens/profile_screen/empty_notify.dart';
+import 'package:bee/screens/profile_screen/estimate1.dart';
+import 'package:bee/screens/profile_screen/estimate2.dart';
 import 'package:bee/screens/profile_screen/notifications.dart';
 import 'package:bee/screens/profile_screen/order_history.dart';
 import 'package:bee/utils/constants.dart';
@@ -68,7 +70,16 @@ class ProfilePage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      menuBlock(title: "Health Card", width: width, icon: "m4"),
+                      menuBlock(
+                          title: "Health Card",
+                          width: width,
+                          icon: "m4",
+                          onpress: () {
+                            pushNewScreen(
+                              context,
+                              screen: EstimateTwo(),
+                            );
+                          }),
                       menuBlock(
                         title: "Address",
                         width: width,
