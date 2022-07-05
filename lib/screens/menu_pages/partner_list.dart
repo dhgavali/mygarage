@@ -1,6 +1,7 @@
 import 'package:bee/global_widgets/custom_scaffold.dart';
 import 'package:bee/global_widgets/cutom_appbar.dart';
 import 'package:bee/global_widgets/search_bar.dart';
+import 'package:bee/screens/cart_screen/widgets.dart';
 import 'package:bee/screens/service_select/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,21 @@ class _PartnerListState extends State<PartnerList> {
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
         child: Scaffold(
+      floatingActionButton: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(
+            color: Colors.red,
+          ),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Text(
+          "Load More",
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       drawer: MyDrawer(),
       body: SingleChildScrollView(
           child: Column(
@@ -51,14 +67,35 @@ class _PartnerListState extends State<PartnerList> {
           ),
           Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: ConstrainedBox(
               constraints: BoxConstraints(maxWidth: width),
               child: Table(
+                columnWidths: {
+                  0: FlexColumnWidth(1),
+                  1: FlexColumnWidth(2),
+                  2: FlexColumnWidth(2),
+                  3: FlexColumnWidth(2),
+                },
                 children: [
                   rowHeader(),
+                  spaceRow(),
                   datarow(),
+                  spaceRow(),
                   datarow(),
+                  spaceRow(),
+                  datarow(),
+                  spaceRow(),
+                  datarow(),
+                  spaceRow(),
+                  datarow(),
+                  spaceRow(),
+                  datarow(),
+                  spaceRow(),
+                  datarow(),
+                  spaceRow(),
+                  datarow(),
+                  spaceRow(),
                 ],
               ),
             ),
@@ -71,22 +108,22 @@ class _PartnerListState extends State<PartnerList> {
   TableRow rowHeader() {
     return TableRow(
         decoration: BoxDecoration(
-          color: Colors.grey,
+          color: Colors.grey.shade400,
           borderRadius: BorderRadius.circular(30),
         ),
         children: [
-          rowTitle(),
-          rowTitle(),
-          rowTitle(),
-          rowTitle(),
+          rowTitle("Sr. No"),
+          rowTitle("Workshop Name"),
+          rowTitle("Address"),
+          rowTitle("Contact No."),
         ]);
   }
 
-  Widget rowTitle() {
+  Widget rowTitle(String title) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       child: Text(
-        "Hello",
+        title,
         style: TextStyle(color: Colors.white),
       ),
     );
@@ -95,8 +132,8 @@ class _PartnerListState extends State<PartnerList> {
   TableRow datarow() {
     return TableRow(
         decoration: BoxDecoration(
-          color: Colors.grey,
-          borderRadius: BorderRadius.circular(30),
+          color: Colors.grey.shade100,
+          borderRadius: BorderRadius.circular(0),
         ),
         children: [
           Flexible(child: datacell("1")),
@@ -106,12 +143,28 @@ class _PartnerListState extends State<PartnerList> {
         ]);
   }
 
+  TableRow spaceRow() {
+    return TableRow(
+        decoration: BoxDecoration(
+          color: Colors.grey.shade400,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        children: [
+          Container(height: 5, color: Colors.white),
+          Container(height: 5, color: Colors.white),
+          Container(height: 5, color: Colors.white),
+          Container(height: 5, color: Colors.white),
+        ]);
+  }
+
   Widget datacell(String data) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       child: Text(
         data,
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(
+          color: Colors.grey.shade600,
+        ),
       ),
     );
   }

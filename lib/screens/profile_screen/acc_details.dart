@@ -36,6 +36,9 @@ class _AccountDetailsState extends State<AccountDetails> {
                 Column(
                   children: [
                     CustomAppBar(height: height, width: width),
+                    SizedBox(
+                      height: 5,
+                    ),
                     profileBanner(
                       width: width,
                       height: height,
@@ -105,6 +108,11 @@ class _AccountDetailsState extends State<AccountDetails> {
       height: height * 0.25,
       decoration: BoxDecoration(
         color: Colors.yellow.shade200,
+        gradient: LinearGradient(
+            colors: [Colors.red, Colors.white],
+            begin: FractionalOffset.bottomLeft,
+            end: FractionalOffset.topRight,
+            stops: [0.5, 0]),
       ),
       child: Column(
         children: [

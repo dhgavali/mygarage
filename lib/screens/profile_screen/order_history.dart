@@ -68,13 +68,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                 ),
                 _orderType ? HorderComplete() : HorderProcess(),
                 _orderType
-                    ? LongButton(
-                        width: width,
-                        height: 40,
-                        title: "Track Order",
-                        onpress: () {},
-                      )
-                    : GestureDetector(
+                    ? GestureDetector(
                         onTap: () {
                           // TODO: show feedback dialog
                         },
@@ -98,6 +92,12 @@ class _OrderHistoryState extends State<OrderHistory> {
                             )),
                             borderColor: Colors.red,
                             width: width),
+                      )
+                    : LongButton(
+                        width: width,
+                        height: 40,
+                        title: "Track Order",
+                        onpress: () {},
                       ),
               ],
             ),

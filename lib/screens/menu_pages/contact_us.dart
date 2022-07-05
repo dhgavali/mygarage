@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bee/global_widgets/custom_scaffold.dart';
 import 'package:bee/global_widgets/cutom_appbar.dart';
 import 'package:bee/screens/cart_screen/widgets.dart';
@@ -23,6 +24,7 @@ class _ContactUsState extends State<ContactUs> {
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
         child: Scaffold(
+      backgroundColor: Colors.white,
       drawer: MyDrawer(),
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -51,6 +53,22 @@ class _ContactUsState extends State<ContactUs> {
                 height: height * 0.01,
                 color: Colors.transparent,
               ),
+              ContactBox(),
+              SizedBox(height: 10),
+              Container(
+                width: width * .95,
+                height: height * 0.2,
+                color: Colors.grey,
+                child: Center(
+                    child: Text(
+                  "MAP View",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                )),
+              ),
+              SizedBox(height: 20),
               cInputField(
                 label: "Full Name",
                 context: context,
@@ -129,7 +147,7 @@ class _ContactUsState extends State<ContactUs> {
             validator: valids,
             keyboardType: keyboard,
             controller: txController,
-            maxLines: 10,
+            maxLines: 8,
             cursorColor: Colors.black,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.symmetric(
@@ -160,6 +178,80 @@ class _ContactUsState extends State<ContactUs> {
           height: 10,
         ),
       ],
+    );
+  }
+}
+
+class ContactBox extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
+    return myContainer(
+      customPadding: EdgeInsets.symmetric(
+        vertical: 16,
+        horizontal: 10,
+      ),
+      width: width,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _dataBox(
+              width: width,
+              title: "Phone",
+              icon: Icons.phone_in_talk_outlined,
+              subtitle: "+91-222304020"),
+          _dataBox(
+              width: width,
+              title: "Address",
+              icon: Icons.location_on_outlined,
+              subtitle: "60-49 Road 11378 NCR"),
+          _dataBox(
+              width: width,
+              title: "Open Time",
+              icon: Icons.access_time,
+              subtitle: "10:00 am to 23:00 pm"),
+          _dataBox(
+            width: width,
+            title: "Email",
+            icon: Icons.email_outlined,
+            subtitle: "hello@colorlib.com",
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _dataBox({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required double width,
+  }) {
+    return Container(
+      width: width * 0.2,
+      child: Column(
+        children: [
+          Icon(
+            icon,
+            color: Colors.grey,
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Consts.titleText2(text: title),
+          SizedBox(
+            height: 5,
+          ),
+          FittedBox(
+            child: AutoSizeText(
+              subtitle,
+              maxFontSize: 12,
+              minFontSize: 6,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

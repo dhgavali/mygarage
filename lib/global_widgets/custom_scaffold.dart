@@ -1,6 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bee/global_widgets/cutom_appbar.dart';
+import 'package:bee/screens/menu_pages/about_us.dart';
 import 'package:bee/screens/menu_pages/be_partner.dart';
+import 'package:bee/screens/menu_pages/blogs.dart';
+import 'package:bee/screens/menu_pages/career_page.dart';
 import 'package:bee/screens/menu_pages/contact_us.dart';
 import 'package:bee/screens/menu_pages/faq.dart';
 import 'package:bee/screens/menu_pages/partner_list.dart';
@@ -175,7 +178,12 @@ class MyDrawer extends StatelessWidget {
             height: 10,
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+                  pushNewScreen(
+                context,
+                screen: AboutUs(),
+              );
+            },
             title: Consts.titleText(text: "ABOUT US"),
           ),
           ListTile(
@@ -188,7 +196,12 @@ class MyDrawer extends StatelessWidget {
             title: Consts.titleText(text: "CONTACT US 23X7"),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+                  pushNewScreen(
+                context,
+                screen: BlogsPage(),
+              );
+            },
             title: Consts.titleText(text: "BLOGS"),
           ),
           ListTile(
@@ -211,7 +224,12 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             minVerticalPadding: 0,
-            onTap: () {},
+            onTap: () {
+                  pushNewScreen(
+                context,
+                screen: CareerPage(),
+              );
+            },
             title: Consts.titleText(text: "CAREER"),
           ),
           ListTile(

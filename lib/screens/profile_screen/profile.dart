@@ -7,6 +7,8 @@ import 'package:bee/screens/profile_screen/address.dart';
 import 'package:bee/screens/profile_screen/empty_notify.dart';
 import 'package:bee/screens/profile_screen/estimate1.dart';
 import 'package:bee/screens/profile_screen/estimate2.dart';
+import 'package:bee/screens/profile_screen/health_card.dart';
+import 'package:bee/screens/profile_screen/mycar.dart';
 import 'package:bee/screens/profile_screen/notifications.dart';
 import 'package:bee/screens/profile_screen/order_history.dart';
 import 'package:bee/utils/constants.dart';
@@ -61,7 +63,16 @@ class ProfilePage extends StatelessWidget {
                               screen: OrderHistory(),
                             );
                           }),
-                      menuBlock(title: "My Car", width: width, icon: "m3"),
+                      menuBlock(
+                          title: "My Car",
+                          width: width,
+                          icon: "m3",
+                          onpress: () {
+                            pushNewScreen(
+                              context,
+                              screen: MyCarHome(),
+                            );
+                          }),
                     ],
                   ),
                 ),
@@ -77,7 +88,7 @@ class ProfilePage extends StatelessWidget {
                           onpress: () {
                             pushNewScreen(
                               context,
-                              screen: EstimateTwo(),
+                              screen: HealthCard(),
                             );
                           }),
                       menuBlock(
@@ -169,10 +180,6 @@ class ProfilePage extends StatelessWidget {
     return Container(
       width: width,
       height: height * 0.25,
-      // decoration: BoxDecoration(
-      //   color: Colors.yellow.shade200,
-      // ),
-
       decoration: BoxDecoration(
         gradient: LinearGradient(
             colors: [Colors.red, Colors.white],

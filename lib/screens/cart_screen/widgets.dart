@@ -222,6 +222,7 @@ Widget cInputField({
   required String hint,
   required TextEditingController txController,
   required String? valids(String? value),
+  double? width ,
   TextInputType keyboard = TextInputType.name,
 }) {
   return Column(
@@ -229,7 +230,7 @@ Widget cInputField({
     children: [
       Consts.titleText(text: label),
       Container(
-        width: MediaQuery.of(context).size.width * 0.8,
+        width: width ?? MediaQuery.of(context).size.width * 0.8,
         margin: EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           color: Colors.white,
