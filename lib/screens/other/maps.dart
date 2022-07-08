@@ -39,6 +39,12 @@ class _MapViewPageState extends State<MapViewPage> {
           print(pickedData.address);
           _cl.address = pickedData.address;
           Navigator.pop(context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Location Update to ${pickedData.address}"),
+              duration: Duration(seconds: 5),
+            ),
+          );
         },
       ),
     );
