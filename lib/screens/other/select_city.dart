@@ -1,11 +1,45 @@
-import 'package:bee/global_widgets/cutom_appbar.dart';
+import 'dart:collection';
+
+import 'package:bee/screens/other/current_location.dart';
+import 'package:bee/screens/other/maps.dart';
 import 'package:bee/screens/service_select/widgets/appbar.dart';
 import 'package:bee/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class SelectCityPage extends StatelessWidget {
+  Future<LocationData?> checkpermision() async {
+    Location location = new Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return null;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return null;
+      }
+    }
+
+    _locationData = await location.getLocation();
+    return _locationData;
+  }
+
+  CurrentLocation _cl = CurrentLocation();
   @override
   Widget build(BuildContext context) {
+    print(_cl.mylocation);
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
@@ -26,6 +60,20 @@ class SelectCityPage extends StatelessWidget {
             child: Column(
               children: [
                 ListTile(
+                  onTap: () async {
+                    LocationData? _location = await checkpermision();
+                    if (_location == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content:
+                              Text("Please allow location from settings")));
+                    } else {
+                      pushNewScreen(context,
+                          screen: MapViewPage(
+                            latitude: _location.latitude!,
+                            longitude: _location.longitude!,
+                          ));
+                    }
+                  },
                   leading: Transform.rotate(
                     angle: 45,
                     child: Icon(
@@ -34,7 +82,7 @@ class SelectCityPage extends StatelessWidget {
                   ),
                   horizontalTitleGap: 0,
                   title: Text("Detect My Location"),
-                  subtitle: Text("Using GPS"),
+                  subtitle: Text("Using GPS "),
                 ),
                 Container(
                   width: width,

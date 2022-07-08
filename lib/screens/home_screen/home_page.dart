@@ -306,11 +306,9 @@ class HomePage extends StatelessWidget {
 }
 
 class RedStripWidget extends StatelessWidget {
-  const RedStripWidget({
-    Key? key,
-    required this.height,
-  }) : super(key: key);
-
+  const RedStripWidget({Key? key, required this.height, this.maxfont = 12})
+      : super(key: key);
+  final double maxfont;
   final double height;
 
   @override
@@ -332,7 +330,7 @@ class RedStripWidget extends StatelessWidget {
               Icon(Icons.settings, color: Colors.white),
               AutoSizeText(
                 "Geniune Parts",
-                maxFontSize: 12,
+                maxFontSize: maxfont,
                 minFontSize: 5,
                 maxLines: 1,
                 style: Theme.of(context)
@@ -349,7 +347,7 @@ class RedStripWidget extends StatelessWidget {
               Icon(Icons.car_repair_outlined, color: Colors.white),
               AutoSizeText(
                 "2 Free Services",
-                maxFontSize: 12,
+                maxFontSize: maxfont,
                 minFontSize: 5,
                 maxLines: 1,
                 style: Theme.of(context)
@@ -366,7 +364,7 @@ class RedStripWidget extends StatelessWidget {
               Icon(Icons.person_outline, color: Colors.white),
               AutoSizeText(
                 "Exprience Staff",
-                maxFontSize: 12,
+                maxFontSize: maxfont,
                 minFontSize: 5,
                 maxLines: 1,
                 style: Theme.of(context)
@@ -383,7 +381,7 @@ class RedStripWidget extends StatelessWidget {
               Icon(Icons.watch_later_outlined, color: Colors.white),
               AutoSizeText(
                 "Time Management",
-                maxFontSize: 12,
+                maxFontSize: maxfont,
                 minFontSize: 5,
                 maxLines: 1,
                 style: Theme.of(context)

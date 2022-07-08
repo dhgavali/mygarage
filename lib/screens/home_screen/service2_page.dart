@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bee/global_widgets/search_bar.dart';
 import 'package:bee/screens/cart_screen/filled_cart.dart';
+import 'package:bee/screens/home_screen/widgets.dart';
+import 'package:bee/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:bee/global_widgets/custom_scaffold.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -261,6 +263,38 @@ class ServiceTwoPage extends StatelessWidget {
   }
 }
 
+class StatusWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 49,
+      height: 49,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.grey.shade100,
+        border: Border.all(color: Colors.grey.withOpacity(0.2), width: 1),
+      ),
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Icon(
+          Icons.access_time,
+          color: Colors.grey,
+          size: 16,
+        ),
+        Wrap(
+          direction: Axis.horizontal,
+          children: [
+            AutoSizeText(
+              "3 Hrs \n Taken",
+              maxFontSize: 10,
+              minFontSize: 6,
+            ),
+          ],
+        ),
+      ]),
+    );
+  }
+}
+
 class MostPopular extends StatelessWidget {
   const MostPopular({
     Key? key,
@@ -278,13 +312,14 @@ class MostPopular extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       child: GestureDetector(
         onTap: () {
-          //TODO: add to cart
           pushNewScreen(context,
               screen: FilledCart(),
               pageTransitionAnimation: PageTransitionAnimation.cupertino);
         },
         child: Container(
-          height: height * 0.2,
+          margin: EdgeInsets.symmetric(horizontal: 8),
+          height: height * 0.22,
+          width: width,
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey),
           ),
@@ -296,8 +331,9 @@ class MostPopular extends StatelessWidget {
                 width: width * 0.35,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("assets/images/service.png"),
-                      fit: BoxFit.cover),
+                    image: AssetImage("assets/images/service.png"),
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 child: Container(
                   height: 20,
@@ -312,51 +348,127 @@ class MostPopular extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 10),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          AutoSizeText(
-                            "Complete Car Service",
-                            maxFontSize: 22,
-                            minFontSize: 10,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 5),
+                width: width * 0.5,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            AutoSizeText(
+                              "Complete Car Service",
+                              maxFontSize: 22,
+                              minFontSize: 10,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black),
+                            ),
+                            AutoSizeText(
+                              "Rs 699",
+                              maxFontSize: 22,
+                              minFontSize: 10,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      color: Theme.of(context).primaryColor),
+                            ),
+                            AutoSizeText(
+                              "Save upto Rs 299",
+                              maxFontSize: 12,
+                              minFontSize: 10,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.green),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            StatusWidget(),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 5, vertical: 3),
+                              color: Colors.grey,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.add,
+                                    size: 14,
+                                    color: Colors.white,
+                                  ),
+                                  Consts.titleText3(
+                                    text: "Add",
+                                    color: Colors.white,
+                                    minfsize: 10,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    dashLine(),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        featureName(),
+                        featureName(),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        featureName(),
+                        featureName(),
+                      ],
+                    ),
+                    Center(
+                      child: TextButton(
+                        style: ButtonStyle(
+                          splashFactory:
+                              InkSparkle.constantTurbulenceSeedSplashFactory,
+                          // surfaceTintColor: MaterialStateProperty.all(Colors.red),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          minimumSize:
+                              MaterialStateProperty.all(const Size(0, 5)),
+                        ),
+                        child: Text(
+                          "+3 more View all",
+                          style: TextStyle(
+                            fontSize: 10,
+                            decoration: TextDecoration.underline,
                           ),
-                          AutoSizeText(
-                            "Rs 699",
-                            maxFontSize: 22,
-                            minFontSize: 10,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    color: Theme.of(context).primaryColor),
-                          ),
-                          AutoSizeText(
-                            "Save upto Rs 299",
-                            maxFontSize: 12,
-                            minFontSize: 10,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyText1!
-                                .copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.green),
-                          ),
-                        ],
+                        ),
+                        onPressed: () {},
                       ),
-                    ],
-                  )
-                ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bee/global_widgets/cutom_appbar.dart';
-import 'package:bee/screens/auth_screen/login.dart';
 import 'package:bee/screens/menu_pages/about_us.dart';
 import 'package:bee/screens/menu_pages/be_partner.dart';
 import 'package:bee/screens/menu_pages/blogs.dart';
@@ -14,7 +13,6 @@ import 'package:bee/screens/other/maps.dart';
 import 'package:bee/screens/other/select_city.dart';
 import 'package:bee/services/auth/authentication.dart';
 import 'package:bee/utils/constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -128,9 +126,8 @@ class MyDrawer extends StatelessWidget {
           GestureDetector(
             onTap: () {
               // Navigator.push(
-              //     context, MaterialPageRoute(builder: (context) => MapPage()));
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => SelectCityPage())));
+              //     context, MaterialPageRoute(builder: (context) => MyWidget()));
+              pushNewScreen(context, screen: SelectCityPage());
             },
             child: Container(
               height: 50,
