@@ -19,12 +19,12 @@ class GetNotification extends StatefulWidget {
 class _GetNotificationState extends State<GetNotification> {
   late bool isNotifications;
 
-  Future<void> getData() async {
-    await Future.delayed(Duration(seconds: 2));
-    setState(() {
-      isNotifications = false;
-    });
-  }
+  // Future<void> getData() async {
+  //   await Future.delayed(Duration(seconds: 2));
+  //   setState(() {
+  //     isNotifications = false;
+  //   });
+  // }
 
   @override
   void initState() {
@@ -34,14 +34,12 @@ class _GetNotificationState extends State<GetNotification> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    isNotifications ? getData() : () => {};
-    return isNotifications ? EmptyNotifs() : FilledNotifs();
+    return FilledNotifs();
   }
 }
 

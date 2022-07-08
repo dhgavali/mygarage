@@ -167,7 +167,9 @@ class DirectionButtons extends StatelessWidget {
 }
 
 class CarCard extends StatelessWidget {
-  const CarCard({Key? key}) : super(key: key);
+  final bool isSelected;
+
+  const CarCard({this.isSelected = true});
 
   @override
   Widget build(BuildContext context) {
@@ -194,41 +196,61 @@ class CarCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            padding: EdgeInsets.only(
-              bottom: 40,
-            ),
-            alignment: Alignment.center,
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Consts.titleText(
-                text: "Mahendra Thar",
-                color: Colors.white,
+          isSelected
+              ? Container(
+                  alignment: Alignment.topRight,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    color: Colors.grey,
+                    child: Consts.titleText(
+                      text: "Selected",
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.only(
+                  bottom: 40,
+                ),
+                alignment: Alignment.center,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Consts.titleText(
+                        text: "Mahendra Thar",
+                        color: Colors.white,
+                      ),
+                      Consts.titleText2(
+                        text: "Diesel",
+                      ),
+                    ]),
               ),
-              Consts.titleText2(
-                text: "Diesel",
+              Container(
+                width: width * 0.33,
+                height: height * 0.12,
+                child: Image(
+                  image: AssetImage("assets/images/thar_big.png"),
+                ),
               ),
-            ]),
+              SizedBox(
+                width: 30,
+              ),
+              Container(
+                child: Consts.titleText2(
+                  text: "Change",
+                  color: Colors.red,
+                ),
+              ),
+            ],
           ),
-          Container(
-            width: width * 0.33,
-            height: height * 0.12,
-            child: Image(
-              image: AssetImage("assets/images/thar_big.png"),
-            ),
-          ),
-          SizedBox(
-            width: 30,
-          ),
-          Container(
-            child: Consts.titleText2(
-              text: "Change",
-              color: Colors.red,
-            ),
-          ),
+          Container(),
         ],
       ),
     );

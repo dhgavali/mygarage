@@ -1,3 +1,6 @@
+import 'package:bee/screens/auth_screen/login.dart';
+import 'package:bee/screens/auth_screen/otp_page.dart';
+import 'package:bee/services/auth/authentication.dart';
 import 'package:bee/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
@@ -11,6 +14,8 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final GlobalKey<State> _keyLoader = new GlobalKey<State>();
+
   Map<String, String> CreateInfo = {
     // it will contain user info after pressing next.
     "email": "",
@@ -18,15 +23,59 @@ class _SignupPageState extends State<SignupPage> {
     "number": "",
   };
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _mobileController = TextEditingController();
+  final TextEditingController _otpController = TextEditingController();
+  // final TextEditingController _nameController = TextEditingController();
 
-  void confirmButton() {
-    // confirm button function.
+  AuthClass _auth = AuthClass();
+
+  void confirmButton() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
+      FocusManager.instance.primaryFocus!.unfocus();
+      Loadings.showLoadingDialog(context, _keyLoader);
+      await _auth.verifyNumber(
+        CreateInfo['number'] ?? _mobileController.text.toString(),
+        context,
+        _keyLoader,
+        isnew: true,
+        data: CreateInfo,
+      );
+
+      setState(() {
+        isOtpSent = true;
+        isEnabled = false;
+      });
+
+      // if(){}
+
     }
     print(CreateInfo);
-    Navigator.of(context).pushNamed(RouteName.Select_service_screen);
+    // Navigator.of(context).pushNamed(RouteName.Select_service_screen);
   }
+
+  void signIn() async {
+    String verificationId = _auth.verificationId;
+    String? verfiyId = await _auth.getId();
+    Loadings.showLoadingDialog(
+      context,
+      _keyLoader,
+      msg: "Verifying OTP",
+      isLogin: true,
+    );
+    await _auth.signInwithPhoneNumber(verfiyId ?? verificationId,
+        _otpController.text.toString(), context, _keyLoader,
+        isnew: true, data: CreateInfo);
+
+    //      Navigator.of(_keyLoader.currentContext!,
+    //                       rootNavigator: true)
+    //                   .pop();
+    // Navigator.of(context).pushNamed(RouteName.PersistentNavBar);
+  }
+
+  bool isAutomatic = true;
+  bool isOtpSent = false;
+  bool isEnabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -126,18 +175,31 @@ class _SignupPageState extends State<SignupPage> {
                               onSaved: (val) {
                                 if (val != null) CreateInfo['number'] = val;
                               },
+                              // onEditingComplete: () {
+                              //   print("Edit done");
+                              // },
+                              controller: _mobileController,
+
                               decoration: const InputDecoration(
-                                // hintText: "Phone",
+                                // hintText: "Phone number",
                                 // hintStyle: TextStyle(
                                 //     fontSize: 14, fontWeight: FontWeight.w500),
                                 contentPadding: EdgeInsets.only(
                                   left: 14,
                                 ),
+
                                 border: InputBorder.none,
                                 prefixText: "+91  ",
                               ),
+                              enabled: isEnabled,
                               keyboardType: TextInputType.number,
                               maxLength: null,
+                              validator: (value) {
+                                if (value!.length != 10) {
+                                  return "Please Enter valid phone number";
+                                }
+                                return null;
+                              },
                             ),
                           ),
                         ],
@@ -147,69 +209,84 @@ class _SignupPageState extends State<SignupPage> {
                   const SizedBox(
                     height: 5,
                   ),
-                  Card(
-                    margin: EdgeInsets.symmetric(
-                      vertical: size.height * 0.005,
-                      horizontal: size.width * 0.07,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(22),
-                    ),
-                    elevation: 2,
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 2,
-                      ),
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          // const SizedBox(
-                          //   width: 6,
-                          // ),
-                          Flexible(
-                            child: TextFormField(
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                hintText: "One Time Password",
-                                hintStyle: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w500),
-                                contentPadding: EdgeInsets.only(
-                                  left: 14,
-                                ),
-                              ),
-                              keyboardType: TextInputType.number,
-                              maxLength: null,
-                            ),
+                  isOtpSent
+                      ? Card(
+                          margin: EdgeInsets.symmetric(
+                            vertical: size.height * 0.005,
+                            horizontal: size.width * 0.07,
                           ),
-                          TextButton(
-                            onPressed: () {},
-                            style: ButtonStyle(
-                              splashFactory: InkSparkle
-                                  .constantTurbulenceSeedSplashFactory,
-                              // surfaceTintColor: MaterialStateProperty.all(Colors.red),
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              minimumSize:
-                                  MaterialStateProperty.all(const Size(0, 5)),
-                            ),
-                            child: Text(
-                              "Resend OTP",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displaySmall!
-                                  .copyWith(
-                                    color: Colors.black,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w500,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(22),
+                          ),
+                          elevation: 2,
+                          color: Colors.white,
+                          child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 2,
+                              ),
+                              child: Row(
+                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  // const SizedBox(
+                                  //   width: 6,
+                                  // ),
+                                  Flexible(
+                                    child: TextFormField(
+                                      controller: _otpController,
+                                      decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                        hintText: "One Time Password",
+                                        hintStyle: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500),
+                                        contentPadding: EdgeInsets.only(
+                                          left: 14,
+                                        ),
+                                        counterText: "",
+                                      ),
+                                      keyboardType: TextInputType.number,
+                                      maxLength: 6,
+                                    ),
                                   ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                                  TextButton(
+                                    onPressed: () async {
+                                      Loadings.showLoadingDialog(
+                                          context, _keyLoader);
+
+                                      await _auth.verifyNumber(
+                                        _mobileController.text.toString(),
+                                        context,
+                                        _keyLoader,
+                                        isnew: true,
+                                      );
+                                    },
+                                    style: ButtonStyle(
+                                      splashFactory: InkSparkle
+                                          .constantTurbulenceSeedSplashFactory,
+                                      // surfaceTintColor: MaterialStateProperty.all(Colors.red),
+                                      tapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
+                                      minimumSize: MaterialStateProperty.all(
+                                          const Size(0, 5)),
+                                    ),
+                                    child: Text(
+                                      "Resend OTP",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displaySmall!
+                                          .copyWith(
+                                            color: Colors.black,
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    ),
+                                  )
+                                ],
+                              )),
+                        )
+                      : Container(),
                   const SizedBox(
                     height: 5,
                   ),
@@ -233,9 +310,9 @@ class _SignupPageState extends State<SignupPage> {
                           if (val != null) CreateInfo['name'] = val;
                         },
                         validator: (val) {
-                          // if (val) {
-                          //   return "Enter valid email.";
-                          // }
+                          if (val!.isEmpty) {
+                            return "Enter valid Name.";
+                          }
                           return null;
                         },
                         decoration: const InputDecoration(
@@ -303,7 +380,7 @@ class _SignupPageState extends State<SignupPage> {
               height: 5,
             ),
             ElevatedButton(
-              onPressed: confirmButton,
+              onPressed: isOtpSent ? signIn : confirmButton,
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
                   Theme.of(context).primaryColor,
@@ -371,7 +448,8 @@ class _SignupPageState extends State<SignupPage> {
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).popUntil((route) => false);
-                    Navigator.of(context).pushNamed(RouteName.Login_screen);
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: ((context) => LoginPage())));
                   },
                   style: ButtonStyle(
                     splashFactory:

@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bee/global_widgets/persistence_nav_bar.dart';
 import 'package:bee/screens/sos_screen/sos_screen.dart';
 import 'package:bee/utils/routes.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +26,11 @@ class ServiceButton extends StatelessWidget {
           if (img == 'sos') {
             Navigator.of(context).pushNamed(RouteName.Select_SOS_screen);
           } else {
-            // Navigator.of(context).pushNamed(RouteName.SOS_screen);
+            // Navigator.of(context).pushNamed();
             pushNewScreen(context,
-                screen: SosScreen(),
+                screen: PersistentNavBar(
+                  initial: 2,
+                ),
                 pageTransitionAnimation: PageTransitionAnimation.cupertino);
           }
         } else {

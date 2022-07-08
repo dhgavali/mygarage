@@ -1,4 +1,5 @@
 import 'package:bee/global_widgets/persistence_nav_bar.dart';
+import 'package:bee/screens/auth_screen/auth_screen.dart';
 import 'package:bee/screens/auth_screen/login.dart';
 import 'package:bee/screens/auth_screen/signup.dart';
 import 'package:bee/screens/home_screen/home_page.dart';
@@ -7,11 +8,14 @@ import 'package:bee/screens/service_select/select_vehicle.dart';
 import 'package:bee/screens/service_select/select_service_screen.dart';
 import 'package:bee/screens/sos_screen/sos_screen.dart';
 import 'package:bee/utils/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'utils/themes.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -23,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Themes().lightTheme,
-      initialRoute: RouteName.Login_screen,
+      initialRoute: RouteName.Auth_screen,
       routes: {
         RouteName.Select_service_screen: (context) => SelectServiceScreen(),
         RouteName.Select_vehicle_screen: (context) => VechicleBrandModel(),
@@ -33,6 +37,7 @@ class MyApp extends StatelessWidget {
         RouteName.SignUp_screen: (context) => SignupPage(),
         RouteName.HomePage: (context) => HomePage(),
         RouteName.PersistentNavBar: (context) => PersistentNavBar(),
+        RouteName.Auth_screen: (context) => AuthScreen(),
       },
     );
   }

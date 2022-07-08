@@ -2,11 +2,14 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bee/global_widgets/custom_scaffold.dart';
 import 'package:bee/global_widgets/cutom_appbar.dart';
 import 'package:bee/screens/cart_screen/widgets.dart';
+import 'package:bee/screens/order_screen/track_orders.dart';
 import 'package:bee/screens/service_select/widgets/appbar.dart';
 import 'package:bee/screens/service_select/widgets/service_button.dart';
 import 'package:bee/utils/constants.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class OrderHistory extends StatefulWidget {
   @override
@@ -15,13 +18,19 @@ class OrderHistory extends StatefulWidget {
 
 class _OrderHistoryState extends State<OrderHistory> {
   bool _orderType = false;
+
+  GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
+  int _rating = 3;
+
   @override
   Widget build(BuildContext context) {
     print(_orderType);
+
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
+          key: scaffoldkey,
           backgroundColor: Colors.white,
           drawer: MyDrawer(),
           body: Container(
@@ -70,7 +79,11 @@ class _OrderHistoryState extends State<OrderHistory> {
                 _orderType
                     ? GestureDetector(
                         onTap: () {
-                          // TODO: show feedback dialog
+                          scaffoldkey.currentState!.showBottomSheet((context) =>
+                              BottomSheet(
+                                  enableDrag: false,
+                                  onClosing: () {},
+                                  builder: (context) => feedbackWindow()));
                         },
                         child: myContainer(
                             child: Container(
@@ -97,7 +110,12 @@ class _OrderHistoryState extends State<OrderHistory> {
                         width: width,
                         height: 40,
                         title: "Track Order",
-                        onpress: () {},
+                        onpress: () {
+                          pushNewScreen(
+                            context,
+                            screen: TrackOrders(),
+                          );
+                        },
                       ),
               ],
             ),
@@ -134,10 +152,6 @@ class _OrderHistoryState extends State<OrderHistory> {
             color: isSelected ? Colors.white : Consts().greyColor),
       ),
     );
-  }
-
-  Widget mybody() {
-    return Container();
   }
 }
 
@@ -340,6 +354,120 @@ class HorderProcess extends StatelessWidget {
           ),
         ),
       ]),
+    );
+  }
+}
+
+class feedbackWindow extends StatelessWidget {
+  const feedbackWindow({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    return Container(
+      alignment: Alignment.center,
+      width: width,
+      height: height * 0.5,
+      child: Container(
+        width: width * 0.95,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        height: height * 0.5,
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade200,
+            spreadRadius: 2.0,
+            blurRadius: 2.0,
+          )
+        ]),
+        child: Column(children: [
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: AutoSizeText(
+              "Write Review!",
+              minFontSize: 20,
+              maxFontSize: 24,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: Consts.titleText2(
+                text:
+                    "Please write Overall level of satisfaction \nwith your Service"),
+          ),
+          Center(
+            child: RatingBar.builder(
+              initialRating: 3,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: false,
+              tapOnlyMode: true,
+              itemCount: 5,
+              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+              itemBuilder: (context, _) => Icon(
+                Icons.star,
+                color: Colors.red,
+              ),
+              onRatingUpdate: (rating) {
+                print("changed");
+                print(rating);
+                // this._rating = rating.toInt();
+                // ValueNotifier(_rating).value =
+                //     rating.toInt();
+              },
+            ),
+          ),
+          Container(
+              width: width * 0.8,
+              padding: EdgeInsets.symmetric(vertical: 20),
+              alignment: Alignment.topLeft,
+              child: Consts.titleText(text: "Write your reviews: ")),
+          Container(
+            width: width * 0.8,
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey.withOpacity(0.2),
+              ),
+            ),
+            child: TextFormField(
+              maxLines: 8,
+              decoration: InputDecoration(
+                hintText: "Write your review here",
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                border: InputBorder.none,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).maybePop();
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: AutoSizeText(
+                "Submit",
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                minFontSize: 14,
+                maxFontSize: 14,
+              ),
+            ),
+          ),
+        ]),
+      ),
     );
   }
 }

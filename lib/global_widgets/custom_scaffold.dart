@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bee/global_widgets/cutom_appbar.dart';
+import 'package:bee/screens/auth_screen/login.dart';
 import 'package:bee/screens/menu_pages/about_us.dart';
 import 'package:bee/screens/menu_pages/be_partner.dart';
 import 'package:bee/screens/menu_pages/blogs.dart';
@@ -9,10 +10,15 @@ import 'package:bee/screens/menu_pages/faq.dart';
 import 'package:bee/screens/menu_pages/partner_list.dart';
 import 'package:bee/screens/menu_pages/privacy_policy.dart';
 import 'package:bee/screens/menu_pages/terms_of_service.dart';
+import 'package:bee/screens/other/maps.dart';
+import 'package:bee/screens/other/select_city.dart';
+import 'package:bee/services/auth/authentication.dart';
 import 'package:bee/utils/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
+import 'dart:ui' as ui;
 
 class CustomScaffold extends StatelessWidget {
   final Widget body;
@@ -119,59 +125,67 @@ class MyDrawer extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Container(
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: Color(0xff305088),
+          GestureDetector(
+            onTap: () {
+              // Navigator.push(
+              //     context, MaterialPageRoute(builder: (context) => MapPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => SelectCityPage())));
+            },
+            child: Container(
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: Color(0xff305088),
+                ),
               ),
-            ),
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Row(children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 10.0,
-                  ),
-                  child: AutoSizeText(
-                    "Change Location",
-                    minFontSize: 8,
-                    maxFontSize: 16,
-                    style: TextStyle(
-                      color: Color(0xff305088),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Row(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10.0,
+                    ),
+                    child: AutoSizeText(
+                      "Change Location",
+                      minFontSize: 8,
+                      maxFontSize: 16,
+                      style: TextStyle(
+                        color: Color(0xff305088),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 10.0,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10.0,
+                    ),
+                    child: Row(children: [
+                      Icon(
+                        Icons.edit_location_outlined,
+                        size: 10,
+                      ),
+                      Text(
+                        "Sector-03, Patna, Bihar",
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: Color(0xff305088),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                    ]),
                   ),
-                  child: Row(children: [
-                    Icon(
-                      Icons.edit_location_outlined,
-                      size: 10,
-                    ),
-                    Text(
-                      "Sector-03, Patna, Bihar",
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: Color(0xff305088),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                  ]),
-                ),
-              ]),
+                ]),
+              ),
             ),
           ),
           SizedBox(
@@ -179,7 +193,7 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-                  pushNewScreen(
+              pushNewScreen(
                 context,
                 screen: AboutUs(),
               );
@@ -197,7 +211,7 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-                  pushNewScreen(
+              pushNewScreen(
                 context,
                 screen: BlogsPage(),
               );
@@ -225,7 +239,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             minVerticalPadding: 0,
             onTap: () {
-                  pushNewScreen(
+              pushNewScreen(
                 context,
                 screen: CareerPage(),
               );
@@ -262,8 +276,64 @@ class MyDrawer extends StatelessWidget {
           SizedBox(
             height: 25,
           ),
+          Container(
+            alignment: Alignment.bottomRight,
+            child: GestureDetector(
+              onTap: () async {
+                AuthClass auth = AuthClass();
+                auth.Logout(context);
+              },
+              child: Container(
+                width: width * 0.3,
+                height: width * 0.1,
+                decoration: BoxDecoration(
+                  gradient:
+                      LinearGradient(colors: [Colors.red, Color(0xff999999)]),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(80),
+                    topRight: Radius.circular(50),
+                  ),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  "Logout",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
+  }
+}
+
+class RPSCustomPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint0 = Paint()
+      ..color = const Color.fromARGB(255, 33, 150, 243)
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 2.48;
+    paint0.shader = ui.Gradient.linear(
+        Offset(size.width * 0.42, size.height * 0.63),
+        Offset(size.width * 0.58, size.height * 0.63),
+        [Color(0xffff0000), Color(0xff999999)],
+        [0.00, 1.00]);
+
+    Path path0 = Path();
+    path0.moveTo(size.width, size.height);
+    path0.lineTo(size.width, size.height);
+    path0.quadraticBezierTo(size.width, size.height, size.width, size.height);
+    path0.quadraticBezierTo(size.width, size.height, size.width, size.height);
+    path0.close();
+
+    canvas.drawPath(path0, paint0);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }

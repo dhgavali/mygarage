@@ -1,5 +1,6 @@
 import 'package:bee/screens/cart_screen/empty_cart.dart';
 import 'package:bee/screens/home_screen/home_page.dart';
+import 'package:bee/screens/order_screen/track_orders.dart';
 import 'package:bee/screens/profile_screen/profile.dart';
 import 'package:bee/screens/sos_screen/sos_screen.dart';
 import 'package:bee/utils/constants.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class PersistentNavBar extends StatefulWidget {
-  const PersistentNavBar({Key? key}) : super(key: key);
+  final int initial;
+  PersistentNavBar({this.initial = 0});
 
   @override
   State<PersistentNavBar> createState() => _PersistentNavBarState();
@@ -52,8 +54,13 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
       activeColorPrimary: Consts().primaryColor,
     ),
   ];
-  PersistentTabController _controller =
-      PersistentTabController(initialIndex: 0);
+  late PersistentTabController _controller;
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    _controller = PersistentTabController(initialIndex: widget.initial);
+  }
 
 // TODO: Navbar Configuration
   @override
@@ -69,7 +76,7 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
           duration: Duration(milliseconds: 500)),
       screens: [
         HomePage(),
-        HomePage(),
+        TrackOrders(),
         // HomePage(),
         SosScreen(),
         EmptyCart(),

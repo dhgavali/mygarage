@@ -1,6 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bee/screens/home_screen/service2_page.dart';
 import 'package:bee/screens/service_select/widgets/service_button.dart';
+import 'package:bee/services/auth/authentication.dart';
+import 'package:bee/services/dbmethods.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bee/global_widgets/custom_scaffold.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
@@ -100,7 +104,13 @@ class EmptyCart extends StatelessWidget {
                         BookButton(
                             width: width,
                             height: 40,
-                            onpress: () {
+                            onpress: () async {
+                              // DocumentSnapshot res =
+                              //     await DbMethods().getData("sfsafsf");
+                              // print(FirebaseAuth
+                              //     .instance.currentUser!.phoneNumber!
+                              //     .substring(1));
+                              // print("document ${res.exists} ");
                               pushNewScreen(context,
                                   screen: ServiceTwoPage(),
                                   pageTransitionAnimation:

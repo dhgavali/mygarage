@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bee/global_widgets/search_bar.dart';
 import 'package:bee/screens/home_screen/service1_page.dart';
+import 'package:bee/services/auth/authentication.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:bee/global_widgets/custom_scaffold.dart';
@@ -13,6 +14,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+
     return SafeArea(
       child: Scaffold(
         drawer: MyDrawer(),

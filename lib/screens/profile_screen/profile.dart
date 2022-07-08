@@ -4,24 +4,38 @@ import 'package:bee/screens/cart_screen/widgets.dart';
 import 'package:bee/screens/order_screen/img_verify.dart';
 import 'package:bee/screens/profile_screen/acc_details.dart';
 import 'package:bee/screens/profile_screen/address.dart';
-import 'package:bee/screens/profile_screen/empty_notify.dart';
-import 'package:bee/screens/profile_screen/estimate1.dart';
-import 'package:bee/screens/profile_screen/estimate2.dart';
 import 'package:bee/screens/profile_screen/health_card.dart';
 import 'package:bee/screens/profile_screen/mycar.dart';
 import 'package:bee/screens/profile_screen/notifications.dart';
 import 'package:bee/screens/profile_screen/order_history.dart';
+import 'package:bee/services/auth/authentication.dart';
 import 'package:bee/utils/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String? mobileNumber;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (FirebaseAuth.instance.currentUser != null) {
+      mobileNumber = FirebaseAuth.instance.currentUser!.phoneNumber;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    print(mobileNumber);
     return SafeArea(
       child: Scaffold(
         drawer: MyDrawer(),
@@ -137,30 +151,36 @@ class ProfilePage extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
-                myContainer(
-                  borderColor: Theme.of(context).primaryColor,
-                  customPadding:
-                      EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Icon(
-                          Icons.logout,
-                          color: Colors.red,
+                GestureDetector(
+                  onTap: () async {
+                    AuthClass auth = AuthClass();
+                    await auth.Logout(context);
+                  },
+                  child: myContainer(
+                    borderColor: Theme.of(context).primaryColor,
+                    customPadding:
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: Icon(
+                            Icons.logout,
+                            color: Colors.red,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 24),
-                        child: Consts.titleText(
-                          text: "Log Out",
-                          color: Theme.of(context).primaryColor,
+                        Padding(
+                          padding: EdgeInsets.only(right: 24),
+                          child: Consts.titleText(
+                            text: "Log Out",
+                            color: Theme.of(context).primaryColor,
+                          ),
                         ),
-                      ),
-                      Container(),
-                    ],
+                        Container(),
+                      ],
+                    ),
+                    width: width,
                   ),
-                  width: width,
                 ),
                 SizedBox(
                   height: 10,
@@ -220,7 +240,8 @@ class ProfilePage extends StatelessWidget {
                 child: Consts.titleText(text: "Shubham Verma"),
               ),
               Container(
-                child: Consts.titleText2(text: "+91-9876543210"),
+                child:
+                    Consts.titleText2(text: mobileNumber ?? "+91-9876543210"),
               ),
             ],
           ),
