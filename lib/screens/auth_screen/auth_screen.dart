@@ -11,7 +11,6 @@ class AuthScreen extends StatelessWidget {
       AuthClass().storeAuthkey(FirebaseAuth.instance.currentUser!.uid);
     }
 
-   
     return FirebaseAuth.instance.currentUser != null
         ? PersistentNavBar()
         : LoginPage();

@@ -159,9 +159,8 @@ class LoginPage extends StatelessWidget {
                                 .pop();
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                 content: Text("Account Does not exists")));
-                            Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: ((context) => SignupPage())));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: ((context) => SignupPage())));
                           }
                         }
                       },

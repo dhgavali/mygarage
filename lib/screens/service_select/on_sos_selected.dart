@@ -17,17 +17,17 @@ class SelectSOSScreen extends StatelessWidget {
           fit: StackFit.expand,
           alignment: Alignment.center,
           children: [
-            Positioned(
-              right: 10,
-              top: _height * 0.01,
-              child: Text(
-                "Skip",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1!
-                    .copyWith(decoration: TextDecoration.underline),
-              ),
-            ),
+            // Positioned(
+            //   right: 10,
+            //   top: _height * 0.01,
+            //   child: Text(
+            //     "Skip",
+            //     style: Theme.of(context)
+            //         .textTheme
+            //         .bodyText1!
+            //         .copyWith(decoration: TextDecoration.underline),
+            //   ),
+            // ),
             Positioned(
               top: _height * 0.015,
               child: Text(

@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:bee/screens/cart_screen/widgets.dart';
 import 'package:bee/screens/order_screen/widgets.dart';
 import 'package:bee/utils/constants.dart';
@@ -50,18 +51,7 @@ class OrderConfirmState extends State<OrderConfirm> {
               ),
               Divider(height: height * 0.05, color: Colors.transparent),
               CartPriceTotal(width: width, height: height),
-              Container(
-                alignment: Alignment.center,
-                height: width * 0.3,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Consts().greyColor.withOpacity(0.2),
-                  ),
-                ),
-                child: Text(
-                  "Order stepper",
-                ),
-              ),
+              OrderStepper(),
               SizedBox(
                 height: 10,
               ),
@@ -74,6 +64,134 @@ class OrderConfirmState extends State<OrderConfirm> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class OrderStepper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 40),
+      width: width,
+      height: width * 0.75,
+      child: Center(
+        child: Stack(
+          children: [
+            Positioned(
+              top: 25,
+              left: 30,
+              child: Container(
+                width: 8,
+                color: Colors.grey.shade200,
+                height: width * 0.5,
+              ),
+            ),
+            Positioned(
+              top: 10,
+              width: width,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 10,
+                  ),
+                  StatusDot(
+                    isActive: true,
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  StatusInfo(
+                    title: "Order Placed",
+                    subtitle: "22 Jun 2021, 02:00 PM",
+                    subtitleColor: Colors.black,
+                    isSubtitle: true,
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              top: width * 0.25,
+              width: width,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 10,
+                  ),
+                  StatusDot(
+                    isActive: false,
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  StatusInfo(
+                    title: "Waiting For Confirmation From \nGarage Side",
+                    subtitle: "",
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              top: width * 0.50,
+              width: width,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 10,
+                  ),
+                  StatusDot(
+                    isActive: false,
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  StatusInfo(
+                    title: "Our mechanic out for pick up \nyour vehicle.",
+                    subtitle: "Arriving in 20 min.",
+                    subtitleColor: Colors.black,
+                    isSubtitle: true,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class StatusDot extends StatelessWidget {
+  final bool isActive;
+
+  const StatusDot({this.isActive = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 50,
+      height: 50,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: isActive ? Colors.red : Colors.white,
+          boxShadow: [
+            BoxShadow(
+              spreadRadius: 3,
+              blurRadius: 3,
+              color: Colors.grey.shade200,
+            ),
+          ]),
+      child: isActive
+          ? Icon(
+              Icons.done,
+              color: Colors.white,
+            )
+          : Icon(
+              Icons.hourglass_top,
+              color: Colors.grey,
+            ),
     );
   }
 }

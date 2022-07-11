@@ -219,7 +219,6 @@ class _OtpPageState extends State<OtpPage> {
 
                     await _auth.signInwithPhoneNumber(verificationId!,
                         _otpController.text.toString(), context, _keyLoader);
-                        
                   },
                   style: loginBtnStyle(size),
                   child: Text(

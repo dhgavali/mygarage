@@ -222,7 +222,7 @@ Widget cInputField({
   required String hint,
   required TextEditingController txController,
   required String? valids(String? value),
-  double? width ,
+  double? width,
   TextInputType keyboard = TextInputType.name,
 }) {
   return Column(

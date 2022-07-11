@@ -5,22 +5,29 @@ import 'package:bee/screens/service_select/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
 class Faq extends StatefulWidget {
-  const Faq({Key? key}) : super(key: key);
-
+  final int no_of_question;
+  Faq({this.no_of_question = 6});
   @override
   State<Faq> createState() => _FaqState();
 }
 
 class _FaqState extends State<Faq> {
-  List<Map<String, dynamic>> _items = List.generate(
-      6,
-      (index) => {
-            'id': index,
-            'title': 'Lorem Ipsum Dolor Sit?',
-            'description':
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna  Lorem ipsum dolor sit amet, consectetur adipiscing elit ut Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna  Lorem ipsum dolor sit amet, consectetur adipiscing elit ut ',
-            'isExpanded': false
-          });
+  late List<Map<String, dynamic>> _items;
+
+  @override
+  void initState() {
+    super.initState();
+    _items = List.generate(
+        widget.no_of_question,
+        (index) => {
+              'id': index,
+              'title': 'Lorem Ipsum Dolor Sit?',
+              'description':
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna  Lorem ipsum dolor sit amet, consectetur adipiscing elit ut Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna  Lorem ipsum dolor sit amet, consectetur adipiscing elit ut ',
+              'isExpanded': false
+            });
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;

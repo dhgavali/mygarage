@@ -1,6 +1,5 @@
 import 'package:bee/screens/cart_screen/empty_cart.dart';
 import 'package:bee/screens/home_screen/home_page.dart';
-import 'package:bee/screens/home_screen/service_garage1.dart';
 import 'package:bee/screens/order_screen/track_orders.dart';
 import 'package:bee/screens/profile_screen/profile.dart';
 import 'package:bee/screens/sos_screen/sos_screen.dart';
@@ -19,12 +18,10 @@ class PersistentNavBar extends StatefulWidget {
 class _PersistentNavBarState extends State<PersistentNavBar> {
   List<PersistentBottomNavBarItem> items = [
     PersistentBottomNavBarItem(
-      
       icon: Icon(
         Icons.home_outlined,
       ),
       title: 'Home',
-      
       inactiveColorPrimary: Consts().greyColor,
       activeColorPrimary: Consts().primaryColor,
     ),
@@ -49,7 +46,6 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
       activeColorPrimary: Consts().primaryColor,
     ),
     PersistentBottomNavBarItem(
-      
       icon: Icon(
         Icons.account_circle,
       ),
@@ -71,7 +67,6 @@ class _PersistentNavBarState extends State<PersistentNavBar> {
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
-      
       controller: _controller,
       navBarStyle: NavBarStyle.style8,
       neumorphicProperties: NeumorphicProperties(showSubtitleText: true),

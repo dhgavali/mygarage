@@ -31,3 +31,38 @@ class CallUsButton extends StatelessWidget {
     );
   }
 }
+
+class StatusInfo extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final bool isSubtitle;
+  final Color subtitleColor;
+
+  const StatusInfo({
+    required this.title,
+    required this.subtitle,
+    this.isSubtitle = false,
+    this.subtitleColor = Colors.grey,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Consts.titleText(text: title),
+          SizedBox(
+            height: 5,
+          ),
+          isSubtitle
+              ? Container(
+                  child: Consts.titleText3(
+                      text: subtitle, minfsize: 10, color: subtitleColor),
+                )
+              : Container(),
+        ],
+      ),
+    );
+  }
+}
