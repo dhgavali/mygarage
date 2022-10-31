@@ -49,6 +49,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555739486483:android:e7153e4cc43f3e5a7fe2e6",
+        "android_client_info": {
+          "package_name": "com.mygarage.bee2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555739486483-e2ehluvk3d7nvnvsv0nu0l6hfih4o7ql.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvOScQBYNt0rvPPqQcDnBGHMxiUPSMjDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555739486483-e2ehluvk3d7nvnvsv0nu0l6hfih4o7ql.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

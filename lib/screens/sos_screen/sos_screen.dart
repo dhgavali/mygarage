@@ -177,16 +177,24 @@ class CustomAppBar extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              AutoSizeText(
-                "My Garage",
-                maxFontSize: 16,
-                minFontSize: 5,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(fontWeight: FontWeight.w700, color: Colors.white),
+              // AutoSizeText(
+              //   "My Garage",
+              //   maxFontSize: 16,
+              //   minFontSize: 5,
+              //   overflow: TextOverflow.ellipsis,
+              //   style: Theme.of(context)
+              //       .textTheme
+              //       .bodyText2!
+              //       .copyWith(fontWeight: FontWeight.w700, color: Colors.white),
+              // ),
+              Container(
+                child: Image(
+                  image: AssetImage("assets/images/logo_mini.png"),
+                  width: 40,
+                  height: 20,
+                ),
               ),
+
               const SizedBox(width: 10),
               Icon(Icons.notifications_none_outlined,
                   color: Colors.white, size: height * 0.02),

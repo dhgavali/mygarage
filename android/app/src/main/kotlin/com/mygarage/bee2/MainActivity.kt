@@ -1,4 +1,4 @@
-package com.example.bee2
+package com.mygarage.bee2
 
 import io.flutter.embedding.android.FlutterActivity
 

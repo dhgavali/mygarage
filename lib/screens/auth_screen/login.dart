@@ -47,21 +47,25 @@ class LoginPage extends StatelessWidget {
                     SizedBox(
                       height: size.height * 0.12,
                     ),
-                    Text(
-                      "My Garage",
-                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                          color: Colors.white,
-                          fontSize: 36,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    Text(
-                      "We Keep Your Engine\n Running",
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500),
-                    ),
+                    // Text(
+                    //   "My Garage",
+                    //   style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                    //       color: Colors.white,
+                    //       fontSize: 36,
+                    //       fontWeight: FontWeight.w700),
+                    // ),
+                    // Text(
+                    //   "We Keep Your Engine\n Running",
+                    //   textAlign: TextAlign.center,
+                    //   style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                    //       color: Colors.white,
+                    //       fontSize: 12,
+                    //       fontWeight: FontWeight.w500),
+                    // ),
+                    Container(
+                        width: size.width * 0.4,
+                        child: Image(
+                            image: AssetImage("assets/images/logo_mini.png"),),),
                     SizedBox(
                       height: size.height * 0.12,
                     ),
