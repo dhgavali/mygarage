@@ -10,7 +10,7 @@ import '../../global_widgets/cutom_appbar.dart';
 
 /// page to select services to add inside the cart
 class PopIssue extends StatelessWidget {
-  TextEditingController _issueContro = TextEditingController();
+ final TextEditingController _issueContro = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
